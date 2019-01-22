@@ -1,6 +1,7 @@
 package org.usfirst.frc.team4.robot.commands.automodes;
 
 import org.usfirst.frc.team4.robot.Robot;
+import org.usfirst.frc.team4.robot.constants.ControllerConstants;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -14,10 +15,11 @@ public class DoNothing extends Command {
     }
 
     protected void initialize() {
+        ControllerConstants.driveX.get();
     }
 
     protected void execute() {
-    	Robot.m_chassis.Brake();
+    	
     }
 
     protected boolean isFinished() {

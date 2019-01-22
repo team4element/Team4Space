@@ -3,7 +3,6 @@ package org.usfirst.frc.team4.robot.subsystems;
 import org.usfirst.frc.team4.robot.constants.PneumaticsConstants;
 
 import edu.wpi.first.wpilibj.Compressor;
-import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 

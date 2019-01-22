@@ -64,8 +64,18 @@ public class Robot extends TimedRobot {
 		m_ramp = new Ramp();
 		m_oi = new OI();
 
-		// chooser.addOption("My Auto", new MyAutoCommand());
+ 		//Tuning Automodes
+		m_chooser.addOption("Tune Turn", new TuneTurn());
+		m_chooser.addOption("Tune Drive", new TuneDistance());
+		m_chooser.addOption("Tune vision", new VisionTurn());
+
+		//ETC Auto Modeds
+		m_chooser.setDefaultOption("No Command", new DoNothing());
+
 		SmartDashboard.putData("Auto mode", m_chooser);
+
+		
+		
 	}
 
 	/**
@@ -98,28 +108,8 @@ public class Robot extends TimedRobot {
 	@Override
 	public void autonomousInit() {
 
-		m_chooser = new SendableChooser<>();
-
-		// Tuning Automodes
-		m_chooser.addOption("Tune Turn", new TuneTurn());
-		m_chooser.addOption("Tune Drive", new TuneDistance());
-		m_chooser.addOption("Tune vision", new VisionTurn());
-
-		// ETC
-		m_chooser.setDefaultOption("No Command", new DoNothing());
-
-
-		m_autonomousCommand = new TuneDistance();
-		//SmartDashboard.putData("Auto modes", m_chooser);
-
-		/*
-		 * String autoSelected = SmartDashboard.getString("Auto Selector",
-		 * "Default"); switch(autoSelected) { case "My Auto": autonomousCommand
-		 * = new MyAutoCommand(); break; case "Default Auto": default:
-		 * autonomousCommand = new ExampleCommand(); break; }
-		 */
-
-		// schedule the autonomous command (example)
+		m_autonomousCommand = m_chooser.getSelected();
+	
 		if (m_autonomousCommand != null) {
 			m_autonomousCommand.start();
 		}
