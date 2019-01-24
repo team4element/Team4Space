@@ -1,4 +1,4 @@
-package org.usfirst.frc.team4.robot.commands.automodes;
+package org.usfirst.frc.team4.robot.commands.automodes.tune;
 
 import org.usfirst.frc.team4.robot.commands.PID.DrivePID;
 

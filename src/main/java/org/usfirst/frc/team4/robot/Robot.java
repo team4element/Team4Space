@@ -1,8 +1,8 @@
 package org.usfirst.frc.team4.robot;
 
 import org.usfirst.frc.team4.robot.commands.automodes.DoNothing;
-import org.usfirst.frc.team4.robot.commands.automodes.TuneDistance;
-import org.usfirst.frc.team4.robot.commands.automodes.TuneTurn;
+import org.usfirst.frc.team4.robot.commands.automodes.tune.TuneDistance;
+import org.usfirst.frc.team4.robot.commands.automodes.tune.TuneTurn;
 import org.usfirst.frc.team4.robot.commands.automodes.VisionTurn;
 import org.usfirst.frc.team4.robot.constants.ControllerConstants;
 import org.usfirst.frc.team4.robot.constants.LimelightConstants;
