@@ -19,6 +19,13 @@ public class ChassisConstants {
 	public static double circumference = (kWheelDiameter * Math.PI);
 	public static double ticksPerRevolution = 1024.0;
 	
+	public static double slowDownRate = 0.95;
+
+	public static final int HIGHGEAR_IDX= 0;
+	public static final int LOWGEAR_IDX= 1;
+
+	public static double PHYSICAL_MAX_LOW_SPEED_TICKS = 700;
+	public static double PHYSICAL_MAX_HIGH_SPEED_TICKS = 1300;
 	
 		
 }

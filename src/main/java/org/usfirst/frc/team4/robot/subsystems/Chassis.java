@@ -2,7 +2,9 @@ package org.usfirst.frc.team4.robot.subsystems;
 
 import org.usfirst.frc.team4.robot.commands.Drive;
 import org.usfirst.frc.team4.robot.constants.ChassisConstants;
+import org.usfirst.frc.team4.robot.utilities.DriveSignal;
 import org.usfirst.frc.team4.robot.utilities.ElementMath;
+import org.usfirst.frc.team4.robot.utilities.LightningMath;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
@@ -10,6 +12,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import com.kauailabs.navx.frc.AHRS;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -20,6 +23,11 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Chassis extends Subsystem {
 	// Declaring navX
 	private AHRS navX;
+
+	public double slowUntil = 0;
+	private double lastReversed = 0;
+
+	boolean highGear = false;
 
 	// Declaring Left Motors
 	private WPI_VictorSPX leftFrontMotor;
@@ -56,7 +64,6 @@ public class Chassis extends Subsystem {
 		navX = new AHRS(SPI.Port.kMXP);
 
 	}
-
 	public void initDefaultCommand() {
 		setDefaultCommand(new Drive());
 	}
@@ -114,7 +121,49 @@ public class Chassis extends Subsystem {
 		return navX.getYaw();
 	}
 
-	protected double limit(double value) {
+	public void setVelocityIPS(double left, double right) {
+        setVelocity(LightningMath.ips2talon(left), LightningMath.ips2talon(right));
+	}
+	private void checkReverse(double left, double right) {
+        if (left < 0 && right < 0) {
+            if (Timer.getFPGATimestamp() - lastReversed > 0.3) {
+                lastReversed = Timer.getFPGATimestamp();
+                // Logger.debug("REV POWER: " + left + ", " + right);
+                for (StackTraceElement ste : Thread.currentThread().getStackTrace()) {
+                    // Logger.debug("REV STACK: " + ste.getFileName() + ": " + ste.getMethodName() + ":" + ste.getLineNumber());
+                }
+            }
+        }
+    }
+    public void setVelocity(double left, double right) {
+        SmartDashboard.putNumber("slowuntil", slowUntil);
+        SmartDashboard.putNumber("timer", Timer.getFPGATimestamp());
+        setControlMode(ControlMode.Velocity, 0);
+        if (Timer.getFPGATimestamp() < slowUntil) {
+            SmartDashboard.putString("slowing", "true");
+            double vel = getAverageSpeed() * ChassisConstants.slowDownRate;
+            checkReverse(vel,vel);
+            leftMiddleMotor.set(ControlMode.Velocity, vel);
+            rightMiddleMotor.set(ControlMode.Velocity, vel);
+        } else {
+            SmartDashboard.putString("slowing", "false");
+            SmartDashboard.putNumber("left target vel", leftMiddleMotor.getClosedLoopTarget(0));
+            SmartDashboard.putNumber("right target vel", rightMiddleMotor.getClosedLoopTarget(0));
+            checkReverse(left, right);
+            leftMiddleMotor.set(ControlMode.Velocity, left);
+            rightMiddleMotor.set(ControlMode.Velocity, right);
+        }
+	}
+	public boolean isHighGear() {
+        return highGear;
+    }
+	public double getAverageSpeed() {
+        int pidIdx = (isHighGear() ? ChassisConstants.HIGHGEAR_IDX : ChassisConstants.LOWGEAR_IDX);
+        double leftSpeed = leftMiddleMotor.getSelectedSensorVelocity(pidIdx);
+        double rightSpeed = rightMiddleMotor.getSelectedSensorVelocity(pidIdx);
+        return (leftSpeed  + rightSpeed) / 2;
+    }
+	protected double limit(double value ) {
 		if (value > 1.0) {
 			return 1.0;
 		}
@@ -157,6 +206,10 @@ public class Chassis extends Subsystem {
 
 		setPower(limit(leftMotorOutput), -limit(rightMotorOutput));
 
+	}
+	public void setControlMode(ControlMode mode, int profile){
+		leftMiddleMotor.set(mode, profile);
+		rightMiddleMotor.set(mode, profile);
 	}
 
 	public void log() {
