@@ -191,8 +191,9 @@ public class Chassis extends Subsystem {
 
 
 	public double getVelocity(){
-		double leftSpeed= rightMiddleMotor.getSelectedSensorVelocity(0);
-		double rightSpeed = leftMiddleMotor.getSelectedSensorVelocity(0);
+		//1 code 4 kristian
+		double leftSpeed= ElementMath.ticksToInches(leftMiddleMotor.getSelectedSensorVelocity(0), ChassisConstants.circumference, ChassisConstants.gearRatio, ChassisConstants.ticksPerRevolution);
+		double rightSpeed = ElementMath.ticksToInches(-rightMiddleMotor.getSelectedSensorVelocity(0), ChassisConstants.circumference, ChassisConstants.gearRatio, ChassisConstants.ticksPerRevolution);
 		return  (leftSpeed + rightSpeed) /2; 
 	}
 
@@ -203,7 +204,7 @@ public class Chassis extends Subsystem {
 		SmartDashboard.putNumber("Raw Right Encoder", getRawRightEncoder());
 		SmartDashboard.putNumber("Encoders", getDistance());
 		SmartDashboard.putNumber("Angle", getGyro());
-		// getVelocity();
+		// System.out.println(getVelocity());
 		// SmartDashboard.putNumber("Velocity ", getVelocity());
 	}
 }

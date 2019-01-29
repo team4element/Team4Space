@@ -3,10 +3,8 @@ package org.usfirst.frc.team4.robot;
 import org.usfirst.frc.team4.robot.commands.automodes.VisionTurn;
 import org.usfirst.frc.team4.robot.commands.automodes.tune.TuneDistance;
 import org.usfirst.frc.team4.robot.commands.automodes.tune.TuneTurn;
-import org.usfirst.frc.team4.robot.constants.ChassisConstants;
 import org.usfirst.frc.team4.robot.constants.ControllerConstants;
 import org.usfirst.frc.team4.robot.constants.LimelightConstants;
-import org.usfirst.frc.team4.robot.constants.TrajectoryConstants;
 import org.usfirst.frc.team4.robot.subsystems.Arm;
 import org.usfirst.frc.team4.robot.subsystems.Chassis;
 import org.usfirst.frc.team4.robot.subsystems.Intake;
@@ -25,16 +23,10 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import jaci.pathfinder.Pathfinder;
 import jaci.pathfinder.PathfinderFRC;
 import jaci.pathfinder.Trajectory;
-import jaci.pathfinder.Waypoint;
 import jaci.pathfinder.followers.EncoderFollower;
-import jaci.pathfinder.modifiers.TankModifier;
 
 public class Robot extends TimedRobot {
-	public static Waypoint[] points;
-	
-	public static Trajectory trajectory;
 
-	public static TankModifier modifier;
 
 	public static Notifier followNotifier;
 
@@ -106,30 +98,18 @@ public class Robot extends TimedRobot {
 
 	@Override
 	public void autonomousInit() {
-		points = new Waypoint[]{
-			new Waypoint(30, 60, 0),
-			new Waypoint(150, 60, 0)
-		};
+	
 
 		
-			Trajectory.Config config = new Trajectory.Config(Trajectory.FitMethod.HERMITE_CUBIC, Trajectory.Config.SAMPLES_HIGH, 50, TrajectoryConstants.kV, TrajectoryConstants.kA, 0);
 			
-			trajectory = Pathfinder.generate(points, config);
-		
-			System.out.println(points);
-
-			
+	Trajectory leftTrajectory = PathfinderFRC.getTrajectory("Test.right");
+	Trajectory rightTrajectory = PathfinderFRC.getTrajectory("Test.left");		
 	  
-	  
-		TankModifier modifier = new TankModifier(trajectory).modify(ChassisConstants.wheelbase_width);
-			left = new EncoderFollower(modifier.getLeftTrajectory());
-			right = new EncoderFollower(modifier.getRightTrajectory());
+			left = new EncoderFollower(leftTrajectory);
+			right = new EncoderFollower(rightTrajectory);
 
 			 followNotifier = new Notifier(this::followPath);
-			 followNotifier.startPeriodic(trajectory.get(1).dt);
-			 
-			
-  
+			 followNotifier.startPeriodic(leftTrajectory.get(0).dt);
 
     
 		// m_autonomousCommand = m_chooser.getSelected();
@@ -145,8 +125,8 @@ public class Robot extends TimedRobot {
 		if(left.isFinished() || right.isFinished()){
 			followNotifier.stop();
 		}else{
-		double lPower = left.calculate(m_chassis.getRawLeftEncoder());
-		double rPower= right.calculate(m_chassis.getRawRightEncoder());
+		double lPower = left.calculate((int)m_chassis.getLeftEncoder());
+		double rPower= right.calculate((int)m_chassis.getRightEncoder());
 		System.out.println("Right Power is: "+ rPower);
 		System.out.println("Left Power is: " +lPower);
 		double gyro_heading = Robot.m_chassis.getGyro();
@@ -176,7 +156,7 @@ public class Robot extends TimedRobot {
 
 	@Override
 	public void teleopInit() {
-		followNotifier.stop();
+		// followNotifier.stop();
 		Robot.m_limelight.setCamMode(LimelightConstants.CameraMode.VISION_PROCESSING);
 		Robot.m_limelight.setLEDMode(LimelightConstants.eLEDMode.ON);
 		Robot.m_chassis.log();
