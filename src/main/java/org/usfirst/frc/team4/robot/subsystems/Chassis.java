@@ -182,11 +182,11 @@ public class Chassis extends Subsystem {
 		leftMiddleMotor.set(mode, profile);
 		rightMiddleMotor.set(mode, profile);
 	}
-	public void pathOutput(){
+	public void pathOutput(double leftPower, double rightPower){
 		System.out.println("Left Power is: " + path.leftPower());
 		System.out.println("Right Power is: " + path.rightPower());
-		// leftMiddleMotor.set(ControlMode.PercentOutput, path.leftPower());
-		// rightMiddleMotor.set(ControlMode.PercentOutput, path.rightPower());
+		leftMiddleMotor.set(ControlMode.PercentOutput, leftPower);
+		rightMiddleMotor.set(ControlMode.PercentOutput, rightPower);
 	}
 
 
@@ -204,7 +204,7 @@ public class Chassis extends Subsystem {
 		SmartDashboard.putNumber("Raw Right Encoder", getRawRightEncoder());
 		SmartDashboard.putNumber("Encoders", getDistance());
 		SmartDashboard.putNumber("Angle", getGyro());
-		// System.out.println(getVelocity());
+		System.out.println(getVelocity());
 		// SmartDashboard.putNumber("Velocity ", getVelocity());
 	}
 }

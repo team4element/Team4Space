@@ -3,8 +3,10 @@ package org.usfirst.frc.team4.robot;
 import org.usfirst.frc.team4.robot.commands.automodes.VisionTurn;
 import org.usfirst.frc.team4.robot.commands.automodes.tune.TuneDistance;
 import org.usfirst.frc.team4.robot.commands.automodes.tune.TuneTurn;
+import org.usfirst.frc.team4.robot.constants.ChassisConstants;
 import org.usfirst.frc.team4.robot.constants.ControllerConstants;
 import org.usfirst.frc.team4.robot.constants.LimelightConstants;
+import org.usfirst.frc.team4.robot.constants.TrajectoryConstants;
 import org.usfirst.frc.team4.robot.subsystems.Arm;
 import org.usfirst.frc.team4.robot.subsystems.Chassis;
 import org.usfirst.frc.team4.robot.subsystems.Intake;
@@ -33,6 +35,8 @@ public class Robot extends TimedRobot {
 	public static EncoderFollower left;
 	public static EncoderFollower right;
 
+	Trajectory leftTrajectory;
+	Trajectory rightTrajectory;
 
 
 	public static OI m_oi;
@@ -69,6 +73,12 @@ public class Robot extends TimedRobot {
 		m_oi = new OI();
 		m_pathFinder = new PathFinder();
 
+		leftTrajectory = PathfinderFRC.getTrajectory("Test.right");
+		rightTrajectory = PathfinderFRC.getTrajectory("Test.left");		
+		  
+		left = new EncoderFollower(leftTrajectory);
+		right = new EncoderFollower(rightTrajectory);
+
  		//Tuning Automodes
 		m_chooser.addOption("Tune Turn", new TuneTurn());
 		m_chooser.addOption("Tune Drive", new TuneDistance());
@@ -99,17 +109,22 @@ public class Robot extends TimedRobot {
 	@Override
 	public void autonomousInit() {
 	
-
-		
+		if(ControllerConstants.driveY.get()){
+			m_autonomousCommand.cancel();
+		}
 			
-	Trajectory leftTrajectory = PathfinderFRC.getTrajectory("Test.right");
-	Trajectory rightTrajectory = PathfinderFRC.getTrajectory("Test.left");		
-	  
-			left = new EncoderFollower(leftTrajectory);
-			right = new EncoderFollower(rightTrajectory);
 
-			 followNotifier = new Notifier(this::followPath);
-			 followNotifier.startPeriodic(leftTrajectory.get(0).dt);
+
+
+	left.configureEncoder(m_chassis.getRawLeftEncoder(), ChassisConstants.ticksPerRevolution, ChassisConstants.kWheelDiameter);
+	left.configurePIDVA(TrajectoryConstants.kP, TrajectoryConstants.kI, TrajectoryConstants.kD, TrajectoryConstants.kFeedF, TrajectoryConstants.kA);
+	
+	right.configureEncoder(m_chassis.getRawRightEncoder(), ChassisConstants.ticksPerRevolution, ChassisConstants.kWheelDiameter);
+	right.configurePIDVA(TrajectoryConstants.kP, TrajectoryConstants.kI, TrajectoryConstants.kD, TrajectoryConstants.kFeedF, TrajectoryConstants.kA);
+
+
+	 followNotifier = new Notifier(this::followPath);
+	 followNotifier.startPeriodic(leftTrajectory.get(0).dt);
 
     
 		// m_autonomousCommand = m_chooser.getSelected();
@@ -119,6 +134,7 @@ public class Robot extends TimedRobot {
 		}
 
 		Robot.m_chassis.reset();
+
 	}
 
 	private void followPath(){
@@ -126,16 +142,15 @@ public class Robot extends TimedRobot {
 			followNotifier.stop();
 		}else{
 		double lPower = left.calculate((int)m_chassis.getLeftEncoder());
-		double rPower= right.calculate((int)m_chassis.getRightEncoder());
-		System.out.println("Right Power is: "+ rPower);
-		System.out.println("Left Power is: " +lPower);
-		double gyro_heading = Robot.m_chassis.getGyro();
+		double rPower= -right.calculate((int)m_chassis.getRightEncoder());
+		double gyro_heading = m_chassis.getGyro();
 		double desired_heading = Pathfinder.r2d(left.getHeading());  
-  
 		double angleDifference = Pathfinder.boundHalfDegrees(desired_heading - gyro_heading);
-	   
 		double turn = 0.8 * (-1.0/80.0) * angleDifference;
-		// Robot.m_chassis.setPower(lPower + turn , rPower - turn);
+		
+		System.out.println("Left Power is: " +lPower);
+		System.out.println("Right Power is: "+ rPower);
+		m_chassis.setPower(lPower + turn , rPower - turn);
 		}
 
 	}
@@ -156,7 +171,10 @@ public class Robot extends TimedRobot {
 
 	@Override
 	public void teleopInit() {
-		// followNotifier.stop();
+		if(left.isFinished() || right.isFinished()){
+			followNotifier.stop();
+			m_chassis.Brake();
+		}else{
 		Robot.m_limelight.setCamMode(LimelightConstants.CameraMode.VISION_PROCESSING);
 		Robot.m_limelight.setLEDMode(LimelightConstants.eLEDMode.ON);
 		Robot.m_chassis.log();
@@ -164,6 +182,7 @@ public class Robot extends TimedRobot {
 			m_autonomousCommand.cancel();
 		}
 		Robot.m_chassis.reset();
+		}
 	}
 
 	@Override
