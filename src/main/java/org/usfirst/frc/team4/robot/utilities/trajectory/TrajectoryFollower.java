@@ -1,8 +1,10 @@
 package org.usfirst.frc.team4.robot.utilities.trajectory;
 
+
+
 import org.usfirst.frc.team4.robot.utilities.LightningMath;
 
-import org.usfirst.frc.team4.robot.utilities.trajectory.Trajectory;
+import jaci.pathfinder.Trajectory;
 
 /**
  * PID + Feedforward controller for following a Trajectory.
@@ -43,17 +45,17 @@ public class TrajectoryFollower {
   }
 
   public Trajectory.Segment getSegment() {
-      return profile_.getSegment(current_segment);
+      return profile_.get(current_segment);
   }
   
   public double calculate(double distance_so_far) {
-    if (current_segment < profile_.getNumSegments()) {
-      Trajectory.Segment segment = profile_.getSegment(current_segment++);
-      Trajectory.Segment next = profile_.getSegment(current_segment);
-      double error = segment.pos - distance_so_far;
+    if (current_segment < profile_.length()) {
+      Trajectory.Segment segment = profile_.get(current_segment++);
+      Trajectory.Segment next = profile_.get(current_segment);
+      double error = segment.position - distance_so_far;
       double output = kp_ * error + kd_ * ((error - last_error_)
-              / segment.dt - segment.vel) + (kv_ * next.vel
-              + ka_ * next.acc);
+              / segment.dt - segment.velocity) + (kv_ * next.velocity
+              + ka_ * next.acceleration);
 
       last_error_ = error;
       current_heading = segment.heading;
@@ -70,10 +72,10 @@ public class TrajectoryFollower {
   }
 
   public double deltaHeading() {
-    return LightningMath.boundThetaNegPiToPi(profile_.getSegment(current_segment).heading - current_heading);
+    return LightningMath.boundThetaNegPiToPi(profile_.get(current_segment).heading - current_heading);
   }
 
   public boolean isFinishedTrajectory() {
-    return current_segment >= profile_.getNumSegments();
+    return current_segment >= profile_.length();
   }
 }

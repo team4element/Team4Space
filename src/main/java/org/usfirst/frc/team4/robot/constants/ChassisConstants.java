@@ -17,7 +17,7 @@ public class ChassisConstants {
 	public static double kWheelDiameter = 4.0;
 	public static double gearRatio = (.64);
 	public static double circumference = (kWheelDiameter * Math.PI);
-	public static double ticksPerRevolution = 1024.0;
+	public static int ticksPerRevolution = 1024;
 	
 	public static double slowDownRate = 0.95;
 
@@ -26,6 +26,8 @@ public class ChassisConstants {
 
 	public static double PHYSICAL_MAX_LOW_SPEED_TICKS = 700;
 	public static double PHYSICAL_MAX_HIGH_SPEED_TICKS = 1300;
+
+	public static final double wheelbase_width = 0.7;
 	
 		
 }

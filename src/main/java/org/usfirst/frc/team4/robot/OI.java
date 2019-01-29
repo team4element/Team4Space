@@ -43,7 +43,7 @@ public class OI {
 		ControllerConstants.driveB.toggleWhenPressed(new ToggleLED());
 
 		//Operator
-		ControllerConstants.operatorA.whenPressed(new PulsePistons());
+		// ControllerConstants.operatorA.whenPressed(new PulsePistons());
 		ControllerConstants.operatorB.toggleWhenPressed(new ToggleCompressor());
 		ControllerConstants.operatorStart.toggleWhenPressed(new DeployRamp());
 

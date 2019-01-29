@@ -11,13 +11,13 @@ package org.usfirst.frc.team4.robot.constants;
  * Add your docs here.
  */
 public class TrajectoryConstants {
-    public static final int kP = 0;
-    public static final int kI = 0;
-    public static final int kD = 0;
-    public static final int kV = 0;
-    public static final int kA = 0;
+    public static final double kP = 1;
+    public static final double kI = 0;
+    public static final double kD = 0;
+    public static final double kV = 9550;
+    public static final double kA = 112;
 
-    public static double kTurn = 4;
-    public static double kFeedF = 0;
+    // public static double kTurn = 4;
+    public static double kFeedF = 1/kV;
 
 }
