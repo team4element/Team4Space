@@ -120,10 +120,11 @@ public class Robot extends TimedRobot {
 	left.configurePIDVA(TrajectoryConstants.kP, TrajectoryConstants.kI, TrajectoryConstants.kD, TrajectoryConstants.kFeedF, TrajectoryConstants.kA);
 	
 	right.configureEncoder(m_chassis.getRawRightEncoder(), ChassisConstants.ticksPerRevolution, ChassisConstants.kWheelDiameter);
-	right.configurePIDVA(TrajectoryConstants.kP, TrajectoryConstants.kI, TrajectoryConstants.kD, TrajectoryConstants.kFeedF, TrajectoryConstants.kA);
+	right.configurePIDVA(TrajectoryConstants.kP, TrajectoryConstants.kI, TrajectoryConstants.kD, TrajectoryConstants.kV, TrajectoryConstants.kA);
 
 
 	 followNotifier = new Notifier(this::followPath);
+
 	 followNotifier.startPeriodic(leftTrajectory.get(0).dt);
 
     
@@ -141,7 +142,7 @@ public class Robot extends TimedRobot {
 		if(left.isFinished() || right.isFinished()){
 			followNotifier.stop();
 		}else{
-		double lPower = left.calculate((int)m_chassis.getLeftEncoder());
+		double lPower = left.calculate((int)m_chassis.getRightEncoder());
 		double rPower= -right.calculate((int)m_chassis.getRightEncoder());
 		double gyro_heading = m_chassis.getGyro();
 		double desired_heading = Pathfinder.r2d(left.getHeading());  

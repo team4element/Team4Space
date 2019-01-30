@@ -20,6 +20,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class Chassis extends Subsystem {
 	// Declaring navX
+
+	
 	private AHRS navX;
 
 	public double slowUntil = 0;
@@ -90,13 +92,13 @@ public class Chassis extends Subsystem {
 
 	public double getRightEncoder() {
 
-		return ElementMath.ticksToInches(-rightMiddleMotor.getSelectedSensorPosition(0),
+		return -ElementMath.ticksToInches(-rightMiddleMotor.getSelectedSensorPosition(0),
 				ChassisConstants.circumference, ChassisConstants.gearRatio, ChassisConstants.ticksPerRevolution);
 
 	}
 
 	public double getLeftEncoder() {
-		return ElementMath.ticksToInches(leftMiddleMotor.getSelectedSensorPosition(0), ChassisConstants.circumference,
+		return -ElementMath.ticksToInches(leftMiddleMotor.getSelectedSensorPosition(0), ChassisConstants.circumference,
 				ChassisConstants.gearRatio, ChassisConstants.ticksPerRevolution);
 	}
 
@@ -196,6 +198,14 @@ public class Chassis extends Subsystem {
 		double rightSpeed = ElementMath.ticksToInches(-rightMiddleMotor.getSelectedSensorVelocity(0), ChassisConstants.circumference, ChassisConstants.gearRatio, ChassisConstants.ticksPerRevolution);
 		return  (leftSpeed + rightSpeed) /2; 
 	}
+	
+	public double getVoltage(){
+		double leftVoltage = leftMiddleMotor.getMotorOutputVoltage();
+		double rightVoltage = -rightMiddleMotor.getMotorOutputVoltage();
+		double voltage = (leftVoltage + rightVoltage)/2;
+			return voltage;
+		
+	}
 
 	public void log() {
 		SmartDashboard.putNumber("Left Encoder", getLeftEncoder());
@@ -204,7 +214,8 @@ public class Chassis extends Subsystem {
 		SmartDashboard.putNumber("Raw Right Encoder", getRawRightEncoder());
 		SmartDashboard.putNumber("Encoders", getDistance());
 		SmartDashboard.putNumber("Angle", getGyro());
-		System.out.println(getVelocity());
+		// System.out.println(getVelocity());
+		System.out.println(getVoltage());
 		// SmartDashboard.putNumber("Velocity ", getVelocity());
 	}
 }
