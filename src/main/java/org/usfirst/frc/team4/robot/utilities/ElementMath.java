@@ -24,7 +24,9 @@ public class ElementMath {
 	public static double ticksToInches(double ticks, double circumference, double gearRatio,
 			double TicksPerRevolution) {
 		return ticks * ((circumference * gearRatio) / TicksPerRevolution);
-
+	}
+	public static double rpmToInchesPerSecond(double freeSpeed, double radius){
+		return radius * freeSpeed * 0.10472;
 	}
 
 }

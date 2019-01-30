@@ -16,9 +16,13 @@ public class ChassisConstants {
 	//Encoder Constants
 	public static double kWheelDiameter = 4.0;
 	public static double gearRatio = (.64);
+	public static double gearReduction = (50/32);
 	public static double circumference = (kWheelDiameter * Math.PI);
 	public static int ticksPerRevolution = 1024;
 	
+	public static double motorRPM = 5840;
+	public static double talonVoltage = 12.475;
+
 	public static double slowDownRate = 0.95;
 
 	public static final int HIGHGEAR_IDX= 0;

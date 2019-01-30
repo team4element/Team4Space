@@ -142,8 +142,8 @@ public class Robot extends TimedRobot {
 		if(left.isFinished() || right.isFinished()){
 			followNotifier.stop();
 		}else{
-		double lPower = left.calculate((int)m_chassis.getRightEncoder());
-		double rPower= -right.calculate((int)m_chassis.getRightEncoder());
+		double lPower = left.calculate((int)m_chassis.getLeftEncoder());
+		double rPower= right.calculate((int)m_chassis.getRightEncoder());
 		double gyro_heading = m_chassis.getGyro();
 		double desired_heading = Pathfinder.r2d(left.getHeading());  
 		double angleDifference = Pathfinder.boundHalfDegrees(desired_heading - gyro_heading);
