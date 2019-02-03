@@ -81,14 +81,14 @@ public class Chassis extends Subsystem {
 
 	public double getRightEncoder() {
 
-		return ElementMath.ticksToInches(-rightMiddleMotor.getSelectedSensorPosition(0),
-				ChassisConstants.circumference, ChassisConstants.gearRatio, ChassisConstants.ticksPerRevolution);
+		return (ElementMath.ticksToInches(-rightMiddleMotor.getSelectedSensorPosition(0),
+				ChassisConstants.circumference, ChassisConstants.gearRatio, ChassisConstants.ticksPerRevolution))/12;
 
 	}
 
 	public double getLeftEncoder() {
-		return ElementMath.ticksToInches(leftMiddleMotor.getSelectedSensorPosition(0), ChassisConstants.circumference,
-				ChassisConstants.gearRatio, ChassisConstants.ticksPerRevolution);
+		return (ElementMath.ticksToInches(leftMiddleMotor.getSelectedSensorPosition(0), ChassisConstants.circumference,
+				ChassisConstants.gearRatio, ChassisConstants.ticksPerRevolution))/12;
 	}
 
 	public double getDistance() {
@@ -108,6 +108,11 @@ public class Chassis extends Subsystem {
 		navX.reset();
 		leftMiddleMotor.setSelectedSensorPosition(0, 0, 0);
 		rightMiddleMotor.setSelectedSensorPosition(0, 0, 0);
+	}
+
+	public void motorsForward(){
+		rightMiddleMotor.set(.5);
+		leftMiddleMotor.set(.5);
 	}
 
 	public double getGyro() {

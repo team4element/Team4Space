@@ -1,9 +1,6 @@
 package org.usfirst.frc.team4.robot;
 
-import org.usfirst.frc.team4.robot.commands.automodes.DoNothing;
-import org.usfirst.frc.team4.robot.commands.automodes.tune.TuneDistance;
-import org.usfirst.frc.team4.robot.commands.automodes.tune.TuneTurn;
-import org.usfirst.frc.team4.robot.commands.automodes.VisionTurn;
+import org.usfirst.frc.team4.robot.commands.automodes.SensorlessDrive;
 import org.usfirst.frc.team4.robot.constants.ControllerConstants;
 import org.usfirst.frc.team4.robot.constants.LimelightConstants;
 import org.usfirst.frc.team4.robot.subsystems.Arm;
@@ -19,7 +16,6 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 
 public class Robot extends TimedRobot {
@@ -56,14 +52,16 @@ public class Robot extends TimedRobot {
 		m_oi = new OI();
 
  		//Tuning Automodes
-		m_chooser.addOption("Tune Turn", new TuneTurn());
-		m_chooser.addOption("Tune Drive", new TuneDistance());
-		m_chooser.addOption("Tune vision", new VisionTurn());
+		// m_chooser.addOption("Tune Turn", new TuneTurn());
+		// m_chooser.addOption("Tune Drive", new TuneDistance());
+		// m_chooser.addOption("Tune vision", new VisionTurn());
 
 		//ETC Auto Modeds
-		m_chooser.setDefaultOption("No Command", new DoNothing());
+		// m_chooser.setDefaultOption("No Command", new DoNothing());
 
-		SmartDashboard.putData("Auto mode", m_chooser);
+		// SmartDashboard.putData("Auto mode", m_chooser);
+
+		m_autonomousCommand = new SensorlessDrive();
 
 		
 		
