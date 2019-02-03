@@ -17,7 +17,7 @@ public class ChassisConstants {
 	public static double kWheelDiameter = 4.0;
 	public static double gearRatio = (.64);
 	public static double circumference = (kWheelDiameter * Math.PI);
-	public static double ticksPerRevolution = 1024.0;
+	public static double ticksPerRevolution = 1024.0; // I think it is 4096???
 	
 	
 		
