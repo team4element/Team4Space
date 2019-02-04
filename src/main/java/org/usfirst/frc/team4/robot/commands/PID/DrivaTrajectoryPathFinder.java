@@ -4,6 +4,7 @@ package org.usfirst.frc.team4.robot.commands.PID;
 import java.io.File;
 
 import org.usfirst.frc.team4.robot.Robot;
+import org.usfirst.frc.team4.robot.constants.AutoConstants;
 import org.usfirst.frc.team4.robot.constants.ChassisConstants;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -47,10 +48,10 @@ public class DrivaTrajectoryPathFinder extends Command {
     m_leftFollower = new DistanceFollower(m_leftTrajectory);
     m_rightFollower = new DistanceFollower(m_rightTrajectory);
     m_leftFollower.configurePIDVA(0, 0, 0,
-    .4046, 0);
+    1/AutoConstants.maxVelocity, 0/*AutoConstants.maxAcceleration*/);
     m_rightFollower.configurePIDVA(
     0, 0, 0, 
-    .4104, 0);
+    1/AutoConstants.maxVelocity, 0/*AutoConstants.maxAcceleration*/);
   }
 
   // Called repeatedly when this Command is scheduled to run
@@ -66,7 +67,7 @@ public class DrivaTrajectoryPathFinder extends Command {
     m_turn =
     0 * m_angularError;
     Robot.m_chassis.addDesiredVelocities(m_leftFollower.getSegment().velocity, m_rightFollower.getSegment().velocity);
-    Robot.m_chassis.setPower((m_leftOutput - m_turn)*.5, (m_rightOutput + m_turn)*.5);
+    Robot.m_chassis.setPower((m_leftOutput - m_turn), (m_rightOutput + m_turn));
     SmartDashboard.putNumber("Velocity", m_leftFollower.getSegment().velocity);
   }
 
