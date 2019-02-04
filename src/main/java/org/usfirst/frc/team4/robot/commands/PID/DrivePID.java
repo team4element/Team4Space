@@ -40,7 +40,7 @@ public class DrivePID extends Command {
 
 		if (!canGoForward) {
 			gyro = Robot.m_chassis.getGyro();
-			distance = Robot.m_chassis.getDistance();
+			distance = Robot.m_chassis.getDistanceInches();
 
 			double straightPower = distancePID.calculate(distance);
 			double rotationPower = anglePID.calculate(gyro);

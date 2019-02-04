@@ -26,5 +26,14 @@ public class ElementMath {
 		return ticks * ((circumference * gearRatio) / TicksPerRevolution);
 
 	}
+	
+	public static double ticksToFeet(double ticks, double circumference, double gearRatio,
+	double TicksPerRevolution) {
+return ticks * ((circumference * gearRatio) / TicksPerRevolution)/12;
 
+	}
+	public static double distanceFormula(double x1, double y1, double x2, double y2) {
+		return Math.sqrt(Math.pow((x1-x2), 2) + Math.pow((y1-y2), 2));
+
+	}
 }

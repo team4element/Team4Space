@@ -5,6 +5,7 @@ import org.usfirst.frc.team4.robot.constants.ChassisConstants;
 import org.usfirst.frc.team4.robot.utilities.ElementMath;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.DemandType;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
@@ -30,6 +31,11 @@ public class Chassis extends Subsystem {
 	private WPI_VictorSPX rightFrontMotor;
 	private WPI_TalonSRX rightMiddleMotor;
 	private WPI_VictorSPX rightRearMotor;
+
+	//Motion Stuff
+	private double m_previousDistance, m_currentX, m_currentY, m_angleOffset, m_xOffset, m_yOffset;
+	double m_leftDesiredVel;
+	double m_rightDesiredVel;
 
 	public Chassis() {
 		// Instantiating motors
@@ -79,20 +85,33 @@ public class Chassis extends Subsystem {
 
 	}
 
-	public double getRightEncoder() {
+	public double getRightEncoderInches() {
 
 		return ElementMath.ticksToInches(-rightMiddleMotor.getSelectedSensorPosition(0),
 				ChassisConstants.circumference, ChassisConstants.gearRatio, ChassisConstants.ticksPerRevolution);
 
 	}
 
-	public double getLeftEncoder() {
+	public double getLeftEncoderInches() {
 		return ElementMath.ticksToInches(leftMiddleMotor.getSelectedSensorPosition(0), ChassisConstants.circumference,
 				ChassisConstants.gearRatio, ChassisConstants.ticksPerRevolution);
 	}
 
-	public double getDistance() {
-		return ((getLeftEncoder() + getRightEncoder()) / 2);
+	public double getDistanceInches() {
+		return ((getLeftEncoderInches() + getRightEncoderInches()) / 2);
+
+	}
+
+
+	public double getLeftEncoderFeet() {
+		return ElementMath.ticksToFeet(leftMiddleMotor.getSelectedSensorPosition(0), ChassisConstants.circumference,
+				ChassisConstants.gearRatio, ChassisConstants.ticksPerRevolution);
+	}
+
+	public double getRightEncoderFeet() {
+
+		return ElementMath.ticksToFeet(-rightMiddleMotor.getSelectedSensorPosition(0),
+				ChassisConstants.circumference, ChassisConstants.gearRatio, ChassisConstants.ticksPerRevolution);
 
 	}
 
@@ -159,12 +178,55 @@ public class Chassis extends Subsystem {
 
 	}
 
+	public void calcXY() {
+    	double m_currentDistance = (getRightEncoderFeet() + getLeftEncoderFeet())/2;
+    	double m_distanceTraveled = (m_currentDistance - m_previousDistance);
+    	double angle = getGyro();
+    	m_currentX = m_currentX + m_distanceTraveled * Math.cos(Math.toRadians(angle));
+    	m_currentY = m_currentY + m_distanceTraveled * Math.sin(Math.toRadians(angle));
+    	m_previousDistance = m_currentDistance;
+    }
+    
+    public double getXpos() {
+    	return m_currentX;
+    }
+    
+    public double getYpos() {
+    	return m_currentY;
+	}
+	
+	public double feetToTicks(double feet, double ticksPerFoot) {
+		return feet * ticksPerFoot;
+	}
+
+	public double fpsToTalonVelocityUnits(double fps, double ticksPerFoot) {
+		return feetToTicks(fps, ticksPerFoot)/10;
+	}
+
+	public void setVelocity(double leftVel, double rightVel) {
+		rightMiddleMotor.set(ControlMode.Velocity, rightVel, DemandType.ArbitraryFeedForward , .3841/*ChassisConstants.kRightStatic*/);
+		leftMiddleMotor.set(ControlMode.Velocity, leftVel, DemandType.ArbitraryFeedForward, .3780 /*ChassisConstants.kLeftStatic*/);
+	}
+	
+	public void setVelocityFPS(double leftVel, double rightVel) {
+		setVelocity(fpsToTalonVelocityUnits(leftVel, ChassisConstants.kTicksPerFoot), fpsToTalonVelocityUnits(rightVel, ChassisConstants.kTicksPerFoot));
+	}
+
+	public void factoryResetTalons(){
+		leftMiddleMotor.configFactoryDefault();
+		rightMiddleMotor.configFactoryDefault();
+	}
+
+	public void addDesiredVelocities(double leftVel, double rightVel) {
+        m_leftDesiredVel = leftVel;
+        m_rightDesiredVel = rightVel;
+    }
 	public void log() {
-		SmartDashboard.putNumber("Left Encoder", getLeftEncoder());
-		SmartDashboard.putNumber("Right Encoder", getRightEncoder());
+		SmartDashboard.putNumber("Left Encoder", getLeftEncoderInches());
+		SmartDashboard.putNumber("Right Encoder", getRightEncoderInches());
 		SmartDashboard.putNumber("Raw Left Encoder", getRawLeftEncoder());
 		SmartDashboard.putNumber("Raw Right Encoder", getRawRightEncoder());
-		SmartDashboard.putNumber("Encoders", getDistance());
+		SmartDashboard.putNumber("Encoders", getDistanceInches());
 		SmartDashboard.putNumber("Angle", getGyro());
 	}
 }
