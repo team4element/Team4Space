@@ -16,6 +16,6 @@ public class TestMotionProfile extends CommandGroup {
    * Add your docs here.
    */
   public TestMotionProfile() {
-    addSequential(new DrivaTrajectoryPathFinder("Test"));
+    addSequential(new DrivaTrajectoryPathFinder("TestSpline"));
   }
 }

@@ -19,8 +19,12 @@ public class AutoConstants {
 	public static final double armkI = 0;
 	public static final double armkD = 0;
 
-	//MotionProfile
-	public static final double maxVelocity = 30.546765878497643934859019815506; //Original was 30; Higher Value is smaller speed because 1/maxVelcity
-	public static final double maxAcceleration = 69.455488765954816577556633804123;
-
+	//Motion Profiling
+	public static final double kRotP = 0.5;
+	public static final double kModifier = .840500551;
+	public static final double maxVelocity = 33.8;//30.546765878497643934859019815506;  //Original was 30; Higher Value is smaller speed because 1/maxVelcity
+	public static final double maxAcceleration = 65; //69.455488765954816577556633804123;
+	public static final double kV = (1/maxVelocity)*kModifier;
+	public static final double kA = 1/maxAcceleration;
 }
+
