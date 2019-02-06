@@ -26,5 +26,21 @@ public class AutoConstants {
 	public static final double maxAcceleration = 65; //69.455488765954816577556633804123;
 	public static final double kV = (1/maxVelocity)*kModifier;
 	public static final double kA = 1/maxAcceleration;
-}
+	public static final double kP = 0;
+	public static final double kI = 0;
+	public static final double kD = 0;
 
+
+
+	public enum ePosition {
+		Left, Right, Middle;
+
+	}
+	public enum eLevel {
+		One, Two;
+	}
+
+	public enum eTarget {
+		Front, Middle, Back;
+	}
+}

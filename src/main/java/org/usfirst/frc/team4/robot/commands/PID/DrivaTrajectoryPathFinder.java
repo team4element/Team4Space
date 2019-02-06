@@ -47,10 +47,9 @@ public class DrivaTrajectoryPathFinder extends Command {
   protected void initialize() {
     m_leftFollower = new DistanceFollower(m_leftTrajectory);
     m_rightFollower = new DistanceFollower(m_rightTrajectory);
-    m_leftFollower.configurePIDVA(0, 0, 0,
+    m_leftFollower.configurePIDVA(AutoConstants.kP, AutoConstants.kI, AutoConstants.kD,
     AutoConstants.kV, 0/*AutoConstants.maxAcceleration*/);
-    m_rightFollower.configurePIDVA(
-    0, 0, 0, 
+    m_rightFollower.configurePIDVA(AutoConstants.kP, AutoConstants.kI, AutoConstants.kD,
     AutoConstants.kV, 0/*AutoConstants.maxAcceleration*/);
   }
 

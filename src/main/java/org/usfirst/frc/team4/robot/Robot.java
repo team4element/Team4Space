@@ -32,6 +32,7 @@ public class Robot extends TimedRobot {
 	public static Ramp m_ramp;
 
 	Command m_autonomousCommand;
+	// SendableChooser<Command> m_chooser = new SendableChooser<>();
 	SendableChooser<Command> m_chooser = new SendableChooser<>();
 
 	@Override
