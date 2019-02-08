@@ -1,6 +1,6 @@
 package org.usfirst.frc.team4.robot.utilities;
 
-import org.usfirst.frc.team4.robot.commands.automodes.tune.TuneTurn;
+import org.usfirst.frc.team4.robot.commands.automodes.DoNothing;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -10,13 +10,8 @@ public class AutoChooser {
 
     SendableChooser<startingPosition> startingPositionChooser;
     SendableChooser<target> targetChooser;
-    SendableChooser<startingLevel> startingLevelChooser;
    
     public AutoChooser() { 
-        
-        startingLevelChooser = new SendableChooser<>();
-        startingLevelChooser.setDefaultOption("Level 2", startingLevel.TWO);
-        startingLevelChooser.addOption("Level 1", startingLevel.ONE);
         
         startingPositionChooser = new SendableChooser<>();
         startingPositionChooser.setDefaultOption("Center", startingPosition.CENTER);
@@ -29,7 +24,6 @@ public class AutoChooser {
         targetChooser.addOption("Middle", target.MIDDLE);
         targetChooser.addOption("Back", target.BACK);
         
-        SmartDashboard.putData("Starting Level", startingLevelChooser);
         SmartDashboard.putData("Starting Position", startingPositionChooser);
         SmartDashboard.putData("Target", targetChooser);
       
@@ -41,25 +35,38 @@ public class AutoChooser {
     public startingPosition getStartingPosition() {
         return startingPositionChooser.getSelected();
     }
-    public startingLevel getStaringLevel(){
-        return startingLevelChooser.getSelected();
-    }
 
     public CommandGroup getSelectedAuto() {
         if(getTarget() == target.NONE){
-        return new TuneTurn();
+        return new DoNothing();
+        // }
+        // else if(getStartingPosition() == startingPosition.LEFT && getTarget() == target.FRONT){
+        //   return new
+        // }
+        // else if(getStartingPosition() == startingPosition.LEFT && getTarget() == target.MIDDLE){
+        //   return new
+        // }
+        // else if(getStartingPosition() == startingPosition.RIGHT && getTarget() == target.FRONT){
+        //   return new
+        // }
+        
+        // else if(getStartingPosition() == startingPosition.RIGHT && getTarget() == target.MIDDLE){
+        //   return new
+        // }
+        // else if(getStartingPosition() == startingPosition.MIDDLE && getTarget() == target.LEFT){
+        //   return new 
+        // }
+        // else if(getStartingPosition() == startingPosition.MIDDLE && getTarget() == target.RIGHT){
+        //   return new
+
         } else {
         return new CommandGroup();
         }
     }
     enum startingPosition {
         CENTER, LEFT, RIGHT;
-        }
-    
-        enum startingLevel {
-        ONE, TWO;
-        }
-    
+    }
+
         enum target{
         FRONT, MIDDLE, BACK, NONE;
         }
