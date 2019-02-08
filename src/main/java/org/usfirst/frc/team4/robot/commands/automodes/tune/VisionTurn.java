@@ -21,7 +21,7 @@ public class VisionTurn extends Command {
 		requires(Robot.m_chassis);
 		limelight = Limelight.getInstance();
 
-		turn = new SynchronusPID(AutoConstants.anglekP, AutoConstants.anglekI, AutoConstants.anglekD, false);
+		turn = new SynchronusPID(AutoConstants.angleKP, AutoConstants.angleKI, AutoConstants.angleKD, false);
 		turn.setSetpoint(0);
 
 		SmartDashboard.putData("Vision Turn", turn);

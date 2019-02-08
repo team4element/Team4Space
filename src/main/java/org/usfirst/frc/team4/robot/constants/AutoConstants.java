@@ -3,6 +3,10 @@ package org.usfirst.frc.team4.robot.constants;
  * Constants for auton 
  */
 public class AutoConstants {
+	public final static double WHOLE_ROBOT = 30.5;
+	public final static double CENTER_OF_ROBOT = WHOLE_ROBOT / 2.0;
+	
+
 
 	//Drive forward
 	public static final double drivekP = .03;

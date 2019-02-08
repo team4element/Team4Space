@@ -24,7 +24,7 @@ public class TeleOPVision extends Command {
 		requires(Robot.m_chassis);
 		limelight = Limelight.getInstance();
 		
-		pid = new SynchronusPID(AutoConstants.anglekP, AutoConstants.anglekI, AutoConstants.anglekD, false);
+		pid = new SynchronusPID(AutoConstants.angleKP, AutoConstants.angleKI, AutoConstants.angleKD, false);
 		pid.setSetpoint(0);
 
 		SmartDashboard.putData("Tune Turn Controller", pid);
