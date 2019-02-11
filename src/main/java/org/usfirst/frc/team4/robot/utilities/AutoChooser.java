@@ -58,6 +58,7 @@ public class AutoChooser {
         // }
         // else if(getStartingPosition() == startingPosition.MIDDLE && getTarget() == target.RIGHT){
         //   return new
+        
 
         } else {
         return new CommandGroup();
@@ -67,8 +68,11 @@ public class AutoChooser {
         CENTER, LEFT, RIGHT;
     }
 
-        enum target{
+    enum target{
         FRONT, MIDDLE, BACK, NONE;
         }
-
+      
+    enum gamePiece {
+        BALL, Hatch;
+    }
 }

@@ -14,10 +14,12 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class Arm extends Subsystem {
 	// Declaring Motors
 	private WPI_VictorSPX leftMotor;
+	private WPI_VictorSPX rightMotor;
 
 	//Instantiating Motors
 	public Arm() {
 		leftMotor = new WPI_VictorSPX(ArmConstants.MOTOR_LEFT);
+		rightMotor = new WPI_VictorSPX(ArmConstants.MOTOR_RIGHT);
 	}
 
 	public void initDefaultCommand() {
@@ -27,5 +29,6 @@ public class Arm extends Subsystem {
 
 	public void setPower(double power) {
 		leftMotor.set(ControlMode.PercentOutput, power);
+		rightMotor.set(ControlMode.PercentOutput, power);
 	}
 }
