@@ -20,7 +20,7 @@ public class DrivePID extends Command {
 
 	public DrivePID(double distance, double angle) {
 		distancePID = new SynchronusPID(AutoConstants.drivekP, AutoConstants.drivekI, AutoConstants.drivekD, false);
-		anglePID = new SynchronusPID(AutoConstants.anglekP, AutoConstants.anglekI, AutoConstants.anglekD, false);
+		anglePID = new SynchronusPID(AutoConstants.angleKP, AutoConstants.angleKI, AutoConstants.angleKD, false);
 
 
 		distancePID.setSetpoint(distance);

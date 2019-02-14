@@ -17,7 +17,7 @@ public class AnglePID extends Command {
 	public AnglePID(double setpoint) {
 		requires(Robot.m_chassis);
 
-		pid = new SynchronusPID(AutoConstants.anglekP, AutoConstants.anglekI, AutoConstants.anglekD, false);
+		pid = new SynchronusPID(AutoConstants.angleKP, AutoConstants.angleKI, AutoConstants.angleKD, false);
 		pid.setSetpoint(setpoint);
 
 		SmartDashboard.putData("Tune Turn Controller", pid);
