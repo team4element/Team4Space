@@ -1,6 +1,12 @@
 package org.usfirst.frc.team4.robot.utilities;
 
 import org.usfirst.frc.team4.robot.commands.automodes.DoNothing;
+import org.usfirst.frc.team4.robot.commands.automodes.LeftToFront;
+import org.usfirst.frc.team4.robot.commands.automodes.LeftToMiddle;
+import org.usfirst.frc.team4.robot.commands.automodes.MiddleToLeft;
+import org.usfirst.frc.team4.robot.commands.automodes.MiddleToRight;
+import org.usfirst.frc.team4.robot.commands.automodes.RightToFront;
+import org.usfirst.frc.team4.robot.commands.automodes.RightToMiddle;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -38,26 +44,24 @@ public class AutoChooser {
 
     public CommandGroup getSelectedAuto() {
         if(getTarget() == target.NONE){
-        return new DoNothing();
-        // }
-        // else if(getStartingPosition() == startingPosition.LEFT && getTarget() == target.FRONT){
-        //   return new
-        // }
-        // else if(getStartingPosition() == startingPosition.LEFT && getTarget() == target.MIDDLE){
-        //   return new
-        // }
-        // else if(getStartingPosition() == startingPosition.RIGHT && getTarget() == target.FRONT){
-        //   return new
-        // }
-        
-        // else if(getStartingPosition() == startingPosition.RIGHT && getTarget() == target.MIDDLE){
-        //   return new
-        // }
-        // else if(getStartingPosition() == startingPosition.MIDDLE && getTarget() == target.LEFT){
-        //   return new 
-        // }
-        // else if(getStartingPosition() == startingPosition.MIDDLE && getTarget() == target.RIGHT){
-        //   return new
+        return new DoNothing();}    
+        else if(getStartingPosition() == startingPosition.LEFT && getTarget() == target.FRONT){
+          return new LeftToFront();
+        }
+        else if(getStartingPosition() == startingPosition.LEFT && getTarget() == target.MIDDLE){
+          return new LeftToMiddle();
+        }
+        else if(getStartingPosition() == startingPosition.RIGHT && getTarget() == target.FRONT){
+          return new RightToFront();
+        }
+        else if(getStartingPosition() == startingPosition.RIGHT && getTarget() == target.MIDDLE){
+          return new RightToMiddle();
+        }
+        else if(getStartingPosition() == startingPosition.CENTER && getTarget() == target.LEFT){
+          return new MiddleToLeft();
+        }
+        else if(getStartingPosition() == startingPosition.CENTER && getTarget() == target.RIGHT){
+          return new MiddleToRight();
         
 
         } else {
@@ -69,10 +73,12 @@ public class AutoChooser {
     }
 
     enum target{
-        FRONT, MIDDLE, BACK, NONE;
+        FRONT, MIDDLE, BACK, NONE, LEFT, RIGHT;
         }
+
+    // enum mode{
+    //     MOTION, SYNCHRONOUSPID;
+    // }
       
-    enum gamePiece {
-        BALL, Hatch;
-    }
+    
 }
