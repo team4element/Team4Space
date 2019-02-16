@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
- * Our PID Controller for AnglePID
+ * PID Controller for angle
  */
 public class AnglePID extends Command {
 

@@ -6,7 +6,7 @@ import org.usfirst.frc.team4.robot.constants.LimelightConstants;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- * This command will Toggle the LED's on the Limelight
+ * This command will toggle the LED's on the Limelight
  */
 public class ToggleLED extends Command {
 

@@ -6,7 +6,7 @@ import org.usfirst.frc.team4.robot.constants.ControllerConstants;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- * This command will move the intake
+ * This command will move the intake on the arms
  */
 public class IntakeMove extends Command {
 

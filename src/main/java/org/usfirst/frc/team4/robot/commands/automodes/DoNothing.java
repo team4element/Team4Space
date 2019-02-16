@@ -4,7 +4,8 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 
 public class DoNothing extends CommandGroup {
   /**
-   * Pretends to Program.
+   * Does nothing.
+   * Use this when auto is broken.
    */
   public DoNothing() {
   }

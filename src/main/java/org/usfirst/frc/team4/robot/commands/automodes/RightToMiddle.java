@@ -9,14 +9,14 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 
 public class RightToMiddle extends CommandGroup {
   /**
-   * Starts on the right and targets the Middle.
+   * Starts on the right and targets the middle.
    */
   public RightToMiddle() {  
     //Drives to line 
     addSequential(new DrivePID(-AutoConstants.CENTER_OF_ROBOT+AutoConstants.DISTANCE_TO_LINE , AutoConstants.STRAIGHT), 1.5);
     //Turns to 10 degree angle
     addSequential(new AnglePID(AutoConstants.ANGLE_FOR_RIGHT), 1);
-    //Drives to Middle Target
+    //Drives to middle target
     addSequential(new DrivePID(-AutoConstants.CENTER_OF_ROBOT+AutoConstants.DISTANCE_MIDDLE_TARGET , AutoConstants.STRAIGHT), 1);
     //Turns -90 - 10
     addSequential(new AnglePID(AutoConstants.TURN_LEFT_EXTRA), 1); 

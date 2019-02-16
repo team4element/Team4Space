@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 
 public class MiddleToRight extends CommandGroup {
   /**
-   * Starts in the Middle and Targets the right.
+   * Starts in the middle and targets the right.
    */
   public MiddleToRight() {
     //Drives to half way line

@@ -5,6 +5,11 @@ import org.usfirst.frc.team4.robot.constants.ControllerConstants;
 import edu.wpi.first.wpilibj.command.Command;
 
 public class EndAuto extends Command {
+/**
+ * Ends autonomous
+ * We use it in comman groups 
+ */
+
   public EndAuto() {
   }
 

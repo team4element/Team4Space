@@ -19,7 +19,6 @@ public class Ramp extends Subsystem {
 	}
 
 	public void initDefaultCommand() {
-		// setDefaultCommand(new MySpecialCommand());
 	}
 	
 	public void setPistons(Value direction){

@@ -8,7 +8,7 @@ public class AutoConstants {
 	
 
 
-	//Drive forward
+	//Drive Distance
 	public static final double drivekP = .03;
 	public static final double drivekI = 0;
 	public static final double drivekD = .38;

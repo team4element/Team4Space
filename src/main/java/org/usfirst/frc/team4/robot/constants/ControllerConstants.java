@@ -1,6 +1,6 @@
 package org.usfirst.frc.team4.robot.constants;
 /**
- * Constants for Controllers
+ * Constants for controllers
  */
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;

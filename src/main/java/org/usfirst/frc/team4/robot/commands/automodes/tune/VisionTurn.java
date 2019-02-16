@@ -1,6 +1,7 @@
 package org.usfirst.frc.team4.robot.commands.automodes.tune;
 import org.usfirst.frc.team4.robot.Robot;
 import org.usfirst.frc.team4.robot.constants.AutoConstants;
+import org.usfirst.frc.team4.robot.constants.LimelightConstants;
 import org.usfirst.frc.team4.robot.subsystems.Limelight;
 import org.usfirst.frc.team4.robot.utilities.SynchronusPID;
 
@@ -29,9 +30,17 @@ public class VisionTurn extends Command {
 
 	protected void initialize() {
 		Robot.m_chassis.reset();
-//		Robot.m_limelight.setLEDMode(LimelightConstants.eLEDMode.ON);
-//		Robot.m_limelight.setCamMode(LimelightConstants.CameraMode.VISION_PROCESSING);
+		if(LimelightConstants.isLedOn == false){
+			Robot.m_limelight.setLEDMode(LimelightConstants.eLEDMode.ON);
+			LimelightConstants.isLedOn = true;
+		}
+		else if(LimelightConstants.isVisionMode == false){
+				Robot.m_limelight.setCamMode(LimelightConstants.CameraMode.VISION_PROCESSING);
+				LimelightConstants.isVisionMode = true;
+		}
 	}
+
+	
 
 	protected void execute() {
 		double angle = turn.calculate(Limelight.getInstance().getTX());
@@ -43,11 +52,12 @@ public class VisionTurn extends Command {
 	}
 
 	protected void end() {
-//		Robot.m_limelight.setLEDMode(LimelightConstants.eLEDMode.OFF);
-//		Robot.m_limelight.setCamMode(LimelightConstants.CameraMode.DRIVERSTATION_FEEDBACK);
+		if(LimelightConstants.isLedOn == true){
+			Robot.m_limelight.setLEDMode(LimelightConstants.eLEDMode.OFF);
+			LimelightConstants.isLedOn = false;
+		}
 	}
-
 	protected void interrupted() {
-//		Robot.m_limelight.setLEDMode(LimelightConstants.eLEDMode.OFF);
+		end();
 	}
 }

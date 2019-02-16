@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 
 public class LeftToMiddle extends CommandGroup {
   /**
-   * Starts in Left Position and targets the Middle Peg
+   * Starts in left position and targets the middle target
    */
   public LeftToMiddle() {
 

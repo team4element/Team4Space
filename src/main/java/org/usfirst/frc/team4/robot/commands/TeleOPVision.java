@@ -3,6 +3,7 @@ package org.usfirst.frc.team4.robot.commands;
 import org.usfirst.frc.team4.robot.Robot;
 import org.usfirst.frc.team4.robot.constants.AutoConstants;
 import org.usfirst.frc.team4.robot.constants.ControllerConstants;
+import org.usfirst.frc.team4.robot.constants.LimelightConstants;
 import org.usfirst.frc.team4.robot.subsystems.Limelight;
 import org.usfirst.frc.team4.robot.utilities.ElementMath;
 import org.usfirst.frc.team4.robot.utilities.SynchronusPID;
@@ -16,7 +17,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class TeleOPVision extends Command {
 
-	// private PIDController controller;
 	private SynchronusPID pid;
 	private final Limelight limelight;
 
@@ -33,6 +33,14 @@ public class TeleOPVision extends Command {
 
 	protected void initialize() {
 		Robot.m_chassis.reset();
+		if(LimelightConstants.isLedOn == false){
+			Robot.m_limelight.setLEDMode(LimelightConstants.eLEDMode.ON);
+			LimelightConstants.isLedOn = true;
+		}
+		else if(LimelightConstants.isVisionMode == false){
+				Robot.m_limelight.setCamMode(LimelightConstants.CameraMode.VISION_PROCESSING);
+				LimelightConstants.isVisionMode = true;
+		}
 	}
 
 	protected void execute() {
@@ -47,6 +55,10 @@ public class TeleOPVision extends Command {
 
 	protected void end() {
 		Robot.m_chassis.setPower(0, 0);
+		if(LimelightConstants.isLedOn == true){
+			Robot.m_limelight.setLEDMode(LimelightConstants.eLEDMode.OFF);
+			LimelightConstants.isLedOn = false;
+		}
 	}
 
 	protected void interrupted() {

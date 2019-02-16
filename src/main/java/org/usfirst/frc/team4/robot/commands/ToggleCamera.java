@@ -6,7 +6,7 @@ import org.usfirst.frc.team4.robot.constants.LimelightConstants;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- * Changes Camera modes on Limelight from vision to not vision
+ * Changes camera modes on the Limelight from vision to not vision
  */
 public class ToggleCamera extends Command {
 

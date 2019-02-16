@@ -1,7 +1,7 @@
 package org.usfirst.frc.team4.robot.utilities;
 
 /**
- * General Math Equations we use 
+ * General math equations we use 
  */
 
 public class ElementMath {

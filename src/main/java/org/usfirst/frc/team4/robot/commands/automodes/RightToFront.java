@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 
 public class RightToFront extends CommandGroup {
   /**
-   * Starts on the right ends on the front target
+   * Starts on the right, and ends on the front
    */
   public RightToFront() {
      //Drives to line 

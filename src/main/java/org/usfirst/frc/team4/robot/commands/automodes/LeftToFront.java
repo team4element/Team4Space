@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 
 public class LeftToFront extends CommandGroup {
   /**
-   * Starts in left Position and Targes the Front Peg with Hatch
+   * Starts in left position and targets the front target
    */
   public LeftToFront() {
     //Drives to line 

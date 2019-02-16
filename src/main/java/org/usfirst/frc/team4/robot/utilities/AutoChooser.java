@@ -13,6 +13,10 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class AutoChooser {
+    /**
+     * This class handles choosers for the autonomous period.
+     */
+
 
     SendableChooser<startingPosition> startingPositionChooser;
     SendableChooser<target> targetChooser;
@@ -75,10 +79,4 @@ public class AutoChooser {
     enum target{
         FRONT, MIDDLE, BACK, NONE, LEFT, RIGHT;
         }
-
-    // enum mode{
-    //     MOTION, SYNCHRONOUSPID;
-    // }
-      
-    
 }

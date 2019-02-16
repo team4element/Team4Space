@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
- * Drive PID Controller
+ * PID controller for drive
  */
 public class DrivePID extends Command {
 

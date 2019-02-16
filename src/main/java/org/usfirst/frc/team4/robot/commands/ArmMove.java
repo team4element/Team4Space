@@ -1,4 +1,3 @@
-
 package org.usfirst.frc.team4.robot.commands;
 
 import org.usfirst.frc.team4.robot.Robot;
