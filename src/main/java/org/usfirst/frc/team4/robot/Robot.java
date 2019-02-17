@@ -6,7 +6,7 @@ import org.usfirst.frc.team4.robot.subsystems.Arm;
 import org.usfirst.frc.team4.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team4.robot.subsystems.Intake;
 import org.usfirst.frc.team4.robot.subsystems.Limelight;
-import org.usfirst.frc.team4.robot.subsystems.Pneumatics;
+import org.usfirst.frc.team4.robot.subsystems.HatchRelease;
 import org.usfirst.frc.team4.robot.subsystems.Ramp;
 import org.usfirst.frc.team4.robot.utilities.AutoChooser;
 
@@ -20,7 +20,7 @@ public class Robot extends TimedRobot {
 	public static OI m_oi;
 	public static DriveTrain m_driveTrain;
 	public static Arm m_arm;
-	public static Pneumatics m_pneumatics;
+	public static HatchRelease m_hatchRelease;
 	public static Intake m_intake;
 	public static Limelight m_limelight;
 	public static Ramp m_ramp;
@@ -44,7 +44,7 @@ public class Robot extends TimedRobot {
 		ControllerConstants.init();
 		m_driveTrain = new DriveTrain();
 		m_arm = new Arm();
-		m_pneumatics = new Pneumatics();
+		m_hatchRelease = new HatchRelease();
 		m_intake = new Intake();
 		m_limelight = new Limelight();
 		m_ramp = new Ramp();

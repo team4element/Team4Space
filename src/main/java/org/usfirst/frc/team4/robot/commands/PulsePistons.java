@@ -12,11 +12,11 @@ import edu.wpi.first.wpilibj.command.Command;
 public class PulsePistons extends Command {
 
 	public PulsePistons() {
-		requires(Robot.m_pneumatics);
+		requires(Robot.m_hatchRelease);
 	}
 
 	protected void initialize() {
-		Robot.m_pneumatics.pulseSolenoids();
+		Robot.m_hatchRelease.pulseSolenoids();
 
 	}
 

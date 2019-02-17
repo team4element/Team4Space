@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 /**
  * Subsystem for pneumatics (hatch)
  */
-public class Pneumatics extends Subsystem {
+public class HatchRelease extends Subsystem {
 	
 	//Declaring Solenoids and Compressor
 	
@@ -22,7 +22,7 @@ public class Pneumatics extends Subsystem {
 	public static Solenoid solenoidRightTop;
 	public static Solenoid solenoidRightBot;
 
-	public Pneumatics() {
+	public HatchRelease() {
 		//Instantiating Solenoids and Compressor
 		
 		compressor = new Compressor(PneumaticsConstants.COMPRESSOR);
