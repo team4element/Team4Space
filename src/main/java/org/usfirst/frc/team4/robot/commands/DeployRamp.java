@@ -2,11 +2,10 @@ package org.usfirst.frc.team4.robot.commands;
 
 import org.usfirst.frc.team4.robot.Robot;
 
-import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- *	This command deploys the ramp
+ * This command deploys the ramp
  */
 public class DeployRamp extends Command {
 
@@ -15,7 +14,7 @@ public class DeployRamp extends Command {
     }
 
     protected void initialize() {
-    	Robot.m_ramp.setPistons(Value.kForward);
+    	Robot.m_ramp.pulsePistons();
     }
 
     protected void execute() {
@@ -26,10 +25,8 @@ public class DeployRamp extends Command {
     }
 
     protected void end() {
-    	Robot.m_ramp.setPistons(Value.kOff);
     }
 
     protected void interrupted() {
-    	Robot.m_ramp.setPistons(Value.kReverse);
     }
 }

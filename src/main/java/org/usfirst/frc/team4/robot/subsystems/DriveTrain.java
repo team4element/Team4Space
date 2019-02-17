@@ -17,7 +17,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 /**
  * Subsystem for chassis
  */
-public class Chassis extends Subsystem {
+public class DriveTrain extends Subsystem {
 	// Declaring navX
 	private AHRS navX;
 
@@ -31,7 +31,7 @@ public class Chassis extends Subsystem {
 	private WPI_TalonSRX rightMiddleMotor;
 	private WPI_VictorSPX rightRearMotor;
 
-	public Chassis() {
+	public DriveTrain() {
 		// Instantiating motors
 		leftMiddleMotor = new WPI_TalonSRX(ChassisConstants.MOTOR_LEFT_MIDDLE);
 		leftFrontMotor = new WPI_VictorSPX(ChassisConstants.MOTOR_LEFT_FRONT);

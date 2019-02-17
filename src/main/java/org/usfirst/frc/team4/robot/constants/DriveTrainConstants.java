@@ -3,7 +3,7 @@ package org.usfirst.frc.team4.robot.constants;
 /**
  * Constants for chassis subsystem
  */
-public class ChassisConstants {
+public class DriveTrainConstants {
 
 	// Motors
 	public static final int MOTOR_LEFT_FRONT = 0;

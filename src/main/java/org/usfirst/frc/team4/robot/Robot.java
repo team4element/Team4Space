@@ -3,7 +3,7 @@ package org.usfirst.frc.team4.robot;
 import org.usfirst.frc.team4.robot.constants.ControllerConstants;
 import org.usfirst.frc.team4.robot.constants.LimelightConstants;
 import org.usfirst.frc.team4.robot.subsystems.Arm;
-import org.usfirst.frc.team4.robot.subsystems.Chassis;
+import org.usfirst.frc.team4.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team4.robot.subsystems.Intake;
 import org.usfirst.frc.team4.robot.subsystems.Limelight;
 import org.usfirst.frc.team4.robot.subsystems.Pneumatics;
@@ -18,7 +18,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 
 public class Robot extends TimedRobot {
 	public static OI m_oi;
-	public static Chassis m_chassis;
+	public static DriveTrain m_driveTrain;
 	public static Arm m_arm;
 	public static Pneumatics m_pneumatics;
 	public static Intake m_intake;
@@ -42,7 +42,7 @@ public class Robot extends TimedRobot {
 
 		m_AutoChooser = new AutoChooser(); 
 		ControllerConstants.init();
-		m_chassis = new Chassis();
+		m_driveTrain = new DriveTrain();
 		m_arm = new Arm();
 		m_pneumatics = new Pneumatics();
 		m_intake = new Intake();
@@ -69,7 +69,7 @@ public class Robot extends TimedRobot {
 			m_autonomousCommand.start();
 		}
 
-		Robot.m_chassis.reset();
+		Robot.m_driveTrain.reset();
 
 		m_autonomousCommand = new AutoChooser().getSelectedAuto();
 	}
@@ -85,7 +85,7 @@ public class Robot extends TimedRobot {
 			m_autonomousCommand.cancel();
 		
 	}else{
-		Robot.m_chassis.log();
+		Robot.m_driveTrain.log();
 	}
 		}
 
@@ -93,17 +93,17 @@ public class Robot extends TimedRobot {
 	public void teleopInit() {
 		Robot.m_limelight.setCamMode(LimelightConstants.CameraMode.VISION_PROCESSING);
 		Robot.m_limelight.setLEDMode(LimelightConstants.eLEDMode.ON);
-		Robot.m_chassis.log();
+		Robot.m_driveTrain.log();
 		if (m_autonomousCommand != null) {
 			m_autonomousCommand.cancel();
 		}
-		Robot.m_chassis.reset();
+		Robot.m_driveTrain.reset();
 	}
 
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
-		m_chassis.log();
+		m_driveTrain.log();
 	}
 
 	@Override
