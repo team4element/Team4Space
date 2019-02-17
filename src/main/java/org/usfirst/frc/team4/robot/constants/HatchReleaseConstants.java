@@ -2,7 +2,7 @@ package org.usfirst.frc.team4.robot.constants;
 /**
  * Constants for pneumatic subsystem (for the hatch)
  */
-public class PneumaticsConstants {
+public class HatchReleaseConstants {
 
 	public static final int COMPRESSOR = 0;
 

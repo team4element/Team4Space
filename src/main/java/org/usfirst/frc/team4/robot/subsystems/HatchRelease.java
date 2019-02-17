@@ -1,13 +1,13 @@
 package org.usfirst.frc.team4.robot.subsystems;
 
-import org.usfirst.frc.team4.robot.constants.PneumaticsConstants;
+import org.usfirst.frc.team4.robot.constants.HatchReleaseConstants;
 
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
- * Subsystem for pneumatics (hatch)
+ * Subsystem for HatchRelease (pneumatics)
  */
 public class HatchRelease extends Subsystem {
 	
@@ -25,13 +25,13 @@ public class HatchRelease extends Subsystem {
 	public HatchRelease() {
 		//Instantiating Solenoids and Compressor
 		
-		compressor = new Compressor(PneumaticsConstants.COMPRESSOR);
+		compressor = new Compressor(HatchReleaseConstants.COMPRESSOR);
 
-		solenoidLeftTop = new Solenoid(PneumaticsConstants.SOLENOID_LEFT_TOP);
-		solenoidLeftBot = new Solenoid(PneumaticsConstants.SOLENOID_LEFT_BOT);
+		solenoidLeftTop = new Solenoid(HatchReleaseConstants.SOLENOID_LEFT_TOP);
+		solenoidLeftBot = new Solenoid(HatchReleaseConstants.SOLENOID_LEFT_BOT);
 
-		solenoidRightBot = new Solenoid(PneumaticsConstants.SOLENOID_RIGHT_TOP);
-		solenoidRightTop = new Solenoid(PneumaticsConstants.SOLENOID_RIGHT_BOT);
+		solenoidRightBot = new Solenoid(HatchReleaseConstants.SOLENOID_RIGHT_TOP);
+		solenoidRightTop = new Solenoid(HatchReleaseConstants.SOLENOID_RIGHT_BOT);
 
 	}
 
