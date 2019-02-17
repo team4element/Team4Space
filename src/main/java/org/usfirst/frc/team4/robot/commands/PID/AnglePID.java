@@ -15,7 +15,7 @@ public class AnglePID extends Command {
 	private SynchronusPID pid;
 
 	public AnglePID(double setpoint) {
-		requires(Robot.m_chassis);
+		requires(Robot.m_driveTrain);
 
 		pid = new SynchronusPID(AutoConstants.angleKP, AutoConstants.angleKI, AutoConstants.angleKD, false);
 		pid.setSetpoint(setpoint);
@@ -25,13 +25,13 @@ public class AnglePID extends Command {
 	}
 
 	protected void initialize() {
-		Robot.m_chassis.reset();
+		Robot.m_driveTrain.reset();
 	}
 
 	protected void execute() {
 
-		double angle = pid.calculate(Robot.m_chassis.getGyro());
-		Robot.m_chassis.setPower(angle, angle);
+		double angle = pid.calculate(Robot.m_driveTrain.getGyro());
+		Robot.m_driveTrain.setPower(angle, angle);
 	}
 
 	protected boolean isFinished() {
@@ -39,7 +39,7 @@ public class AnglePID extends Command {
 	}
 
 	protected void end() {
-		Robot.m_chassis.setPower(0, 0);
+		Robot.m_driveTrain.setPower(0, 0);
 	}
 
 	protected void interrupted() {

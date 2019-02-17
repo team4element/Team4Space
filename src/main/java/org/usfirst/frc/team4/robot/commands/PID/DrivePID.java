@@ -30,7 +30,7 @@ public class DrivePID extends Command {
 
 	// Called just before this Command runs the first time
 	protected void initialize() {
-		Robot.m_chassis.reset();
+		Robot.m_driveTrain.reset();
 	}
 
 	// Called repeatedly when this Command is scheduled to run
@@ -39,13 +39,13 @@ public class DrivePID extends Command {
 		SmartDashboard.putData("Angle Sync PID", anglePID);
 
 		if (!canGoForward) {
-			gyro = Robot.m_chassis.getGyro();
-			distance = Robot.m_chassis.getDistance();
+			gyro = Robot.m_driveTrain.getGyro();
+			distance = Robot.m_driveTrain.getDistance();
 
 			double straightPower = distancePID.calculate(distance);
 			double rotationPower = anglePID.calculate(gyro);
 
-			Robot.m_chassis.arcadeDrive(-straightPower * .5, rotationPower);
+			Robot.m_driveTrain.arcadeDrive(-straightPower * .5, rotationPower);
 		}
 	}
 
@@ -54,7 +54,7 @@ public class DrivePID extends Command {
 	}
 
 	protected void end() {
-		Robot.m_chassis.setPower(0, 0);
+		Robot.m_driveTrain.setPower(0, 0);
 	}
 
 	protected void interrupted() {

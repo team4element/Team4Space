@@ -21,7 +21,7 @@ public class TeleOPVision extends Command {
 	private final Limelight limelight;
 
 	public TeleOPVision() {
-		requires(Robot.m_chassis);
+		requires(Robot.m_driveTrain);
 		limelight = Limelight.getInstance();
 		
 		pid = new SynchronusPID(AutoConstants.angleKP, AutoConstants.angleKI, AutoConstants.angleKD, false);
@@ -32,7 +32,7 @@ public class TeleOPVision extends Command {
 	}
 
 	protected void initialize() {
-		Robot.m_chassis.reset();
+		Robot.m_driveTrain.reset();
 		if(LimelightConstants.isLedOn == false){
 			Robot.m_limelight.setLEDMode(LimelightConstants.eLEDMode.ON);
 			LimelightConstants.isLedOn = true;
@@ -45,7 +45,7 @@ public class TeleOPVision extends Command {
 
 	protected void execute() {
 		double angle = pid.calculate(Limelight.getInstance().getTX());
-		Robot.m_chassis.arcadeDrive(ElementMath.handleDeadband(-ElementMath.cubeInput(-Robot.m_oi.leftY(ControllerConstants.driveController)), .05), -angle);
+		Robot.m_driveTrain.arcadeDrive(ElementMath.handleDeadband(-ElementMath.cubeInput(-Robot.m_oi.leftY(ControllerConstants.driveController)), .05), -angle);
 		System.out.println(angle);
 	}
 
@@ -54,7 +54,7 @@ public class TeleOPVision extends Command {
 	}
 
 	protected void end() {
-		Robot.m_chassis.setPower(0, 0);
+		Robot.m_driveTrain.setPower(0, 0);
 		if(LimelightConstants.isLedOn == true){
 			Robot.m_limelight.setLEDMode(LimelightConstants.eLEDMode.OFF);
 			LimelightConstants.isLedOn = false;

@@ -19,7 +19,7 @@ public class VisionTurn extends Command {
 	private final Limelight limelight;
 
 	public VisionTurn() {
-		requires(Robot.m_chassis);
+		requires(Robot.m_driveTrain);
 		limelight = Limelight.getInstance();
 
 		turn = new SynchronusPID(AutoConstants.angleKP, AutoConstants.angleKI, AutoConstants.angleKD, false);
@@ -29,7 +29,7 @@ public class VisionTurn extends Command {
 	}
 
 	protected void initialize() {
-		Robot.m_chassis.reset();
+		Robot.m_driveTrain.reset();
 		if(LimelightConstants.isLedOn == false){
 			Robot.m_limelight.setLEDMode(LimelightConstants.eLEDMode.ON);
 			LimelightConstants.isLedOn = true;
@@ -44,7 +44,7 @@ public class VisionTurn extends Command {
 
 	protected void execute() {
 		double angle = turn.calculate(Limelight.getInstance().getTX());
-		Robot.m_chassis.arcadeDrive(0, -angle);
+		Robot.m_driveTrain.arcadeDrive(0, -angle);
 	}
 
 	protected boolean isFinished() {
