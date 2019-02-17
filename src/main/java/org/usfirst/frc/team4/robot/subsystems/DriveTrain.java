@@ -1,14 +1,14 @@
 package org.usfirst.frc.team4.robot.subsystems;
 
-import org.usfirst.frc.team4.robot.commands.Drive;
-import org.usfirst.frc.team4.robot.constants.ChassisConstants;
-import org.usfirst.frc.team4.robot.utilities.ElementMath;
-
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import com.kauailabs.navx.frc.AHRS;
+
+import org.usfirst.frc.team4.robot.commands.Drive;
+import org.usfirst.frc.team4.robot.constants.DriveTrainConstants;
+import org.usfirst.frc.team4.robot.utilities.ElementMath;
 
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -33,13 +33,13 @@ public class DriveTrain extends Subsystem {
 
 	public DriveTrain() {
 		// Instantiating motors
-		leftMiddleMotor = new WPI_TalonSRX(ChassisConstants.MOTOR_LEFT_MIDDLE);
-		leftFrontMotor = new WPI_VictorSPX(ChassisConstants.MOTOR_LEFT_FRONT);
-		leftRearMotor = new WPI_VictorSPX(ChassisConstants.MOTOR_LEFT_REAR);
+		leftMiddleMotor = new WPI_TalonSRX(DriveTrainConstants.MOTOR_LEFT_MIDDLE);
+		leftFrontMotor = new WPI_VictorSPX(DriveTrainConstants.MOTOR_LEFT_FRONT);
+		leftRearMotor = new WPI_VictorSPX(DriveTrainConstants.MOTOR_LEFT_REAR);
 
-		rightMiddleMotor = new WPI_TalonSRX(ChassisConstants.MOTOR_RIGHT_MIDDLE);
-		rightFrontMotor = new WPI_VictorSPX(ChassisConstants.MOTOR_RIGHT_FRONT);
-		rightRearMotor = new WPI_VictorSPX(ChassisConstants.MOTOR_RIGHT_REAR);
+		rightMiddleMotor = new WPI_TalonSRX(DriveTrainConstants.MOTOR_RIGHT_MIDDLE);
+		rightFrontMotor = new WPI_VictorSPX(DriveTrainConstants.MOTOR_RIGHT_FRONT);
+		rightRearMotor = new WPI_VictorSPX(DriveTrainConstants.MOTOR_RIGHT_REAR);
 
 		// Setting VictorSPX's to follower mode
 		leftFrontMotor.follow(leftMiddleMotor);
@@ -82,13 +82,13 @@ public class DriveTrain extends Subsystem {
 	public double getRightEncoder() {
 
 		return (ElementMath.ticksToInches(-rightMiddleMotor.getSelectedSensorPosition(0),
-				ChassisConstants.circumference, ChassisConstants.gearRatio, ChassisConstants.ticksPerRevolution))/12;
+				DriveTrainConstants.circumference, DriveTrainConstants.gearRatio, DriveTrainConstants.ticksPerRevolution))/12;
 
 	}
 
 	public double getLeftEncoder() {
-		return (ElementMath.ticksToInches(leftMiddleMotor.getSelectedSensorPosition(0), ChassisConstants.circumference,
-				ChassisConstants.gearRatio, ChassisConstants.ticksPerRevolution))/12;
+		return (ElementMath.ticksToInches(leftMiddleMotor.getSelectedSensorPosition(0), DriveTrainConstants.circumference,
+				DriveTrainConstants.gearRatio, DriveTrainConstants.ticksPerRevolution))/12;
 	}
 
 	public double getDistance() {
