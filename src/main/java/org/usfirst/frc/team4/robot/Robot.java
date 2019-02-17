@@ -4,9 +4,9 @@ import org.usfirst.frc.team4.robot.constants.ControllerConstants;
 import org.usfirst.frc.team4.robot.constants.LimelightConstants;
 import org.usfirst.frc.team4.robot.subsystems.Arm;
 import org.usfirst.frc.team4.robot.subsystems.DriveTrain;
+import org.usfirst.frc.team4.robot.subsystems.HatchRelease;
 import org.usfirst.frc.team4.robot.subsystems.Intake;
 import org.usfirst.frc.team4.robot.subsystems.Limelight;
-import org.usfirst.frc.team4.robot.subsystems.HatchRelease;
 import org.usfirst.frc.team4.robot.subsystems.Ramp;
 import org.usfirst.frc.team4.robot.utilities.AutoChooser;
 
@@ -24,7 +24,7 @@ public class Robot extends TimedRobot {
 	public static Intake m_intake;
 	public static Limelight m_limelight;
 	public static Ramp m_ramp;
-	 
+
 	AutoChooser m_AutoChooser;
 
 	Command m_autonomousCommand;

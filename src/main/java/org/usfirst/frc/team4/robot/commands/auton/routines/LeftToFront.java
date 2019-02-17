@@ -1,5 +1,5 @@
 
-package org.usfirst.frc.team4.robot.commands.automodes;
+package org.usfirst.frc.team4.robot.commands.auton.routines;
 
 import org.usfirst.frc.team4.robot.commands.EndAuto;
 import org.usfirst.frc.team4.robot.commands.PID.AnglePID;

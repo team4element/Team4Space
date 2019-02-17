@@ -1,12 +1,12 @@
 package org.usfirst.frc.team4.robot.utilities;
 
-import org.usfirst.frc.team4.robot.commands.automodes.DoNothing;
-import org.usfirst.frc.team4.robot.commands.automodes.LeftToFront;
-import org.usfirst.frc.team4.robot.commands.automodes.LeftToMiddle;
-import org.usfirst.frc.team4.robot.commands.automodes.MiddleToLeft;
-import org.usfirst.frc.team4.robot.commands.automodes.MiddleToRight;
-import org.usfirst.frc.team4.robot.commands.automodes.RightToFront;
-import org.usfirst.frc.team4.robot.commands.automodes.RightToMiddle;
+import org.usfirst.frc.team4.robot.commands.auton.routines.DoNothing;
+import org.usfirst.frc.team4.robot.commands.auton.routines.LeftToFront;
+import org.usfirst.frc.team4.robot.commands.auton.routines.LeftToMiddle;
+import org.usfirst.frc.team4.robot.commands.auton.routines.MiddleToLeft;
+import org.usfirst.frc.team4.robot.commands.auton.routines.MiddleToRight;
+import org.usfirst.frc.team4.robot.commands.auton.routines.RightToFront;
+import org.usfirst.frc.team4.robot.commands.auton.routines.RightToMiddle;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;

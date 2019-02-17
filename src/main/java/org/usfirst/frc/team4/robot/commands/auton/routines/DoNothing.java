@@ -1,4 +1,4 @@
-package org.usfirst.frc.team4.robot.commands.automodes;
+package org.usfirst.frc.team4.robot.commands.auton.routines;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 

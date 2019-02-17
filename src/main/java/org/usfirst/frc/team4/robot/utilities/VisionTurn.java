@@ -1,9 +1,9 @@
-package org.usfirst.frc.team4.robot.commands.automodes.tune;
+package org.usfirst.frc.team4.robot.utilities;
+
 import org.usfirst.frc.team4.robot.Robot;
 import org.usfirst.frc.team4.robot.constants.AutoConstants;
 import org.usfirst.frc.team4.robot.constants.LimelightConstants;
 import org.usfirst.frc.team4.robot.subsystems.Limelight;
-import org.usfirst.frc.team4.robot.utilities.SynchronusPID;
 
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;

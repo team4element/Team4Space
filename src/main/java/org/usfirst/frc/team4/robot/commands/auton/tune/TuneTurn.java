@@ -1,4 +1,4 @@
-package org.usfirst.frc.team4.robot.commands.automodes.tune;
+package org.usfirst.frc.team4.robot.commands.auton.tune;
 
 import org.usfirst.frc.team4.robot.commands.PID.AnglePID;
 
