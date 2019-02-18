@@ -94,6 +94,7 @@ public class Robot extends TimedRobot {
 		Robot.m_limelight.setCamMode(LimelightConstants.CameraMode.VISION_PROCESSING);
 		Robot.m_limelight.setLEDMode(LimelightConstants.eLEDMode.ON);
 		Robot.m_driveTrain.log();
+		Robot.m_arm.log();
 		if (m_autonomousCommand != null) {
 			m_autonomousCommand.cancel();
 		}

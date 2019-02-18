@@ -15,10 +15,11 @@ public class ArmMove extends Command {
 	}
 
 	protected void initialize() {
+		
 	}
 
 	protected void execute() {
-		Robot.m_arm.setPower(Robot.m_oi.leftY(ControllerConstants.operatorController) * 1);
+		Robot.m_arm.setPower(Robot.m_oi.leftY(ControllerConstants.operatorController) * .75);
 	}
 
 	protected boolean isFinished() {

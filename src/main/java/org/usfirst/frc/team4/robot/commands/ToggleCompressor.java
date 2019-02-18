@@ -25,9 +25,10 @@ public class ToggleCompressor extends Command {
     }
 
     protected void end() {
-    	Robot.m_hatchRelease.compressorStop();
+    	
     }
 
     protected void interrupted() {
+        Robot.m_hatchRelease.compressorStop();
     }
 }

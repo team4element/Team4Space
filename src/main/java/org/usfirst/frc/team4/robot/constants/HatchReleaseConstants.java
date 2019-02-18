@@ -7,7 +7,7 @@ public class HatchReleaseConstants {
 	public static final int COMPRESSOR = 0;
 
 	// Left
-	public static final int SOLENOID_LEFT_BOT = 0;
+	public static final int SOLENOID_LEFT_BOT = 4;
 	public static final int SOLENOID_LEFT_TOP = 1;
 
 	// Right
