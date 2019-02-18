@@ -33,6 +33,8 @@ public class HatchRelease extends Subsystem {
 		solenoidRightBot = new Solenoid(HatchReleaseConstants.SOLENOID_RIGHT_TOP);
 		solenoidRightTop = new Solenoid(HatchReleaseConstants.SOLENOID_RIGHT_BOT);
 
+		compressor.setClosedLoopControl(false);
+
 	}
 
 	public void initDefaultCommand() {
