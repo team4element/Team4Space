@@ -13,6 +13,7 @@ import org.usfirst.frc.team4.robot.subsystems.Intake;
 import org.usfirst.frc.team4.robot.subsystems.Limelight;
 import org.usfirst.frc.team4.robot.subsystems.Pneumatics;
 import org.usfirst.frc.team4.robot.subsystems.Ramp;
+import org.usfirst.frc.team4.robot.utilities.AutoChooser;
 
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.cameraserver.CameraServer;
@@ -30,9 +31,10 @@ public class Robot extends TimedRobot {
 	public static Intake m_intake;
 	public static Limelight m_limelight;
 	public static Ramp m_ramp;
+	 
+	AutoChooser m_AutoChooser;
 
 	Command m_autonomousCommand;
-	SendableChooser<Command> m_chooser = new SendableChooser<>();
 
 	@Override
 	public void robotInit() {
@@ -45,6 +47,7 @@ public class Robot extends TimedRobot {
 			cam1.setResolution(160, 120);
 		}).start();
 
+		m_AutoChooser = new AutoChooser(); 
 		ControllerConstants.init();
 		m_chassis = new Chassis();
 		m_arm = new Arm();
@@ -54,20 +57,7 @@ public class Robot extends TimedRobot {
 		m_ramp = new Ramp();
 		m_oi = new OI();
 
- 		//Tuning Automodes
-		m_chooser.addOption("Tune Turn", new TuneTurn());
-		m_chooser.addOption("Tune Drive", new TuneDistance());
-		m_chooser.addOption("Tune vision", new VisionTurn());
-
-		//ETC Auto Modeds
-		m_chooser.setDefaultOption("No Command", new DoNothing());
-
-		SmartDashboard.putData("Auto mode", m_chooser);
-
-		
-		
 	}
-
 
 	@Override
 	public void disabledInit() {
@@ -89,6 +79,8 @@ public class Robot extends TimedRobot {
 		}
 
 		Robot.m_chassis.reset();
+
+		m_autonomousCommand = new AutoChooser().getSelectedAuto();
 	}
 
 	@Override

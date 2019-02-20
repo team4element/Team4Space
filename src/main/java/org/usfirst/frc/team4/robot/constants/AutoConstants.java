@@ -30,5 +30,19 @@ public class AutoConstants {
 	public static final double kMotionV = (1/maxVelocity)*kModifier; 
 	public static final double kMotionA = 1/maxAcceleration; 
 	public static final double kTimeStep = 0.2; 
-}
 
+
+
+
+	public enum ePosition {
+		Left, Right, Middle;
+
+	}
+	public enum eLevel {
+		One, Two;
+	}
+
+	public enum eTarget {
+		Front, Middle, Back;
+	}
+}
