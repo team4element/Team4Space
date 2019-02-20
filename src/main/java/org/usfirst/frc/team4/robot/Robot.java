@@ -1,7 +1,7 @@
 package org.usfirst.frc.team4.robot;
 
 import org.usfirst.frc.team4.robot.commands.automodes.DoNothing;
-import org.usfirst.frc.team4.robot.commands.automodes.TestMotionProfile;
+import org.usfirst.frc.team4.robot.commands.automodes.TestSplineProfile;
 import org.usfirst.frc.team4.robot.commands.automodes.VisionTurn;
 import org.usfirst.frc.team4.robot.commands.automodes.tune.TuneDistance;
 import org.usfirst.frc.team4.robot.commands.automodes.tune.TuneTurn;
@@ -82,7 +82,7 @@ public class Robot extends TimedRobot {
 	@Override
 	public void autonomousInit() {
 
-		m_autonomousCommand = new TestMotionProfile();
+		m_autonomousCommand = new TestSplineProfile();
 	
 		if (m_autonomousCommand != null) {
 			m_autonomousCommand.start();

@@ -1,15 +1,15 @@
 package org.usfirst.frc.team4.robot.subsystems;
 
-import org.usfirst.frc.team4.robot.commands.Drive;
-import org.usfirst.frc.team4.robot.constants.ChassisConstants;
-import org.usfirst.frc.team4.robot.utilities.ElementMath;
-
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.DemandType;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import com.kauailabs.navx.frc.AHRS;
+
+import org.usfirst.frc.team4.robot.commands.Drive;
+import org.usfirst.frc.team4.robot.constants.ChassisConstants;
+import org.usfirst.frc.team4.robot.utilities.ElementMath;
 
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -130,7 +130,7 @@ public class Chassis extends Subsystem {
 	}
 
 	public double getGyro() {
-		return navX.getYaw();
+		return -navX.getAngle();
 	}
 
 	protected double limit(double value) {
@@ -177,8 +177,16 @@ public class Chassis extends Subsystem {
 		setPower(limit(leftMotorOutput), -limit(rightMotorOutput));
 
 	}
+	public void	calcXYInches(){
+		double m_currentDistance = (getRightEncoderInches() + getLeftEncoderInches()) / 2;
+		double m_distanceTraveled = (m_currentDistance - m_previousDistance);
+		double angle = getGyro();
+		m_currentX = m_currentX + m_distanceTraveled * Math.cos(Math.toRadians(angle));
+		m_currentY = m_currentY + m_distanceTraveled * Math.sin(Math.toRadians(angle));
+		m_previousDistance = m_currentDistance;
+	}
 
-	public void calcXY() {
+	public void calcXYFeet() {
     	double m_currentDistance = (getRightEncoderFeet() + getLeftEncoderFeet())/2;
     	double m_distanceTraveled = (m_currentDistance - m_previousDistance);
     	double angle = getGyro();
@@ -186,30 +194,52 @@ public class Chassis extends Subsystem {
     	m_currentY = m_currentY + m_distanceTraveled * Math.sin(Math.toRadians(angle));
     	m_previousDistance = m_currentDistance;
     }
-    
-    public double getXpos() {
+	public double getXPosInches() {
+		calcXYInches();
     	return m_currentX;
     }
+	
+	public double getYPosInches() {
+		calcXYInches();
+		return m_currentY;
+	}
+	
+	public double getXPosFeet() {
+		calcXYFeet();
+		return m_currentX;
+	}
     
-    public double getYpos() {
-    	return m_currentY;
+    public double getYPosFeet() {
+		calcXYFeet();
+		return m_currentY;
 	}
 	
 	public double feetToTicks(double feet, double ticksPerFoot) {
 		return feet * ticksPerFoot;
 	}
-
+	public double inchesToTicks(double inches, double ticksPerInch){
+		return inches * ticksPerInch;
+	}
+	
 	public double fpsToTalonVelocityUnits(double fps, double ticksPerFoot) {
 		return feetToTicks(fps, ticksPerFoot)/10;
 	}
 
+	public double ipsToTalonVelocityUnits(double ips, double ticksPerInch){
+		return inchesToTicks(ips, ticksPerInch)/10;
+	}
+
 	public void setVelocity(double leftVel, double rightVel) {
-		rightMiddleMotor.set(ControlMode.Velocity, rightVel, DemandType.ArbitraryFeedForward , .3841/*ChassisConstants.kRightStatic*/);
-		leftMiddleMotor.set(ControlMode.Velocity, leftVel, DemandType.ArbitraryFeedForward, .3780 /*ChassisConstants.kLeftStatic*/);
+		rightMiddleMotor.set(ControlMode.Velocity, rightVel, DemandType.ArbitraryFeedForward , ChassisConstants.kRightStatic);
+		leftMiddleMotor.set(ControlMode.Velocity, leftVel, DemandType.ArbitraryFeedForward,  ChassisConstants.kLeftStatic);
 	}
 	
 	public void setVelocityFPS(double leftVel, double rightVel) {
 		setVelocity(fpsToTalonVelocityUnits(leftVel, ChassisConstants.kTicksPerFoot), fpsToTalonVelocityUnits(rightVel, ChassisConstants.kTicksPerFoot));
+	}
+
+	public void setVelocityIPS(double leftVel, double rightVel){
+		setVelocity(ipsToTalonVelocityUnits(leftVel, ChassisConstants.kTicksPerInch), ipsToTalonVelocityUnits(rightVel, ChassisConstants.kTicksPerInch));
 	}
 
 	public void factoryResetTalons(){

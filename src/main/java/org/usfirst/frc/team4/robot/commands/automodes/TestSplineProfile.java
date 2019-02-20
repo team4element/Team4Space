@@ -9,16 +9,12 @@ package org.usfirst.frc.team4.robot.commands.automodes;
 
 import org.usfirst.frc.team4.robot.commands.PID.DriveTrajectory;
 import org.usfirst.frc.team4.robot.constants.AutoConstants;
-import org.usfirst.frc.team4.robot.constants.trajectories.TestStraight;
+import org.usfirst.frc.team4.robot.constants.trajectories.TestSpline;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
-public class TestMotionProfile extends CommandGroup {
-  /**
-   * Command Group for Testing Straight Motion Profile
-   */
-  public TestMotionProfile() {
-    // addSequential(new DrivaTrajectoryPathFinder("TestSpline"));
-    addSequential(new DriveTrajectory(TestStraight.testStraightTrajectory, 5, true, AutoConstants.kMotionP, AutoConstants.kMotionD, AutoConstants.kMotionV, AutoConstants.kMotionA));
+public class TestSplineProfile extends CommandGroup {
+  public TestSplineProfile() {
+    addSequential(new DriveTrajectory(TestSpline.testSpline, 5, true, AutoConstants.kMotionP, AutoConstants.kMotionD, AutoConstants.kMotionV, AutoConstants.kMotionA));
   }
 }

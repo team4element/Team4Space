@@ -24,30 +24,17 @@ public class ChassisConstants {
 	public static double circumference = (kWheelDiameter * Math.PI);
 	public static double ticksPerRevolution = 4096;
 	public static double kTicksPerFoot = (ticksPerRevolution*gearRatio) / Math.PI / 2;
+	public static double kTicksPerInch = kTicksPerFoot / 12;
 	public static double wheelbase_width = 1.75;
 
 
-	public static Waypoint[] testPoints = new Waypoint[] {
-		new Waypoint(-4, 0, Pathfinder.d2r(-45)),      // Waypoint @ x=-4, y=-1, exit angle=-45 degrees
-		new Waypoint(-1, -0, 0),                        // Waypoint @ x=-2, y=-2, exit angle=0 radians
-		new Waypoint(0, 0, 0)                           // Waypoint @ x=0, y=0,   exit angle=0 radians
-	};
+	//Velocity Constants
+	public static double kLeftForwardStatic = 0.4064;
+	public static double kLeftBackwardStatic = 0.3760;
+	public static double kRightForwardStatic = 0.4104;
+	public static double kRightBackwardStatic = 0.3822;
 
-	public static Trajectory.Config testConfig = new Trajectory.Config(Trajectory.FitMethod.HERMITE_CUBIC, Trajectory.Config.SAMPLES_HIGH, 0.05, 1.7, 2.0, 60.0);
-
-	// Generate the trajectory
-	public static Trajectory testTrajectory = Pathfinder.generate(testPoints, testConfig);
-
-
-	// Create the Modifier Object
-	TankModifier modifier = new TankModifier(testTrajectory).modify(wheelbase_width);
-
-
-
-	Trajectory left  = modifier.getLeftTrajectory();       // Get the Left Side
-	Trajectory right = modifier.getRightTrajectory();      // Get the Right Side
-	
-	
-	
+	public static double kLeftStatic = (kLeftForwardStatic + kLeftBackwardStatic)/2;
+	public static double kRightStatic = (kRightForwardStatic + kRightBackwardStatic)/2;	
 		
 }

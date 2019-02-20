@@ -1,5 +1,7 @@
-
-
+/*==================================================*/
+/* Adapted from Nerdherd's 2019 code                */
+/* This command follows drive trajectories          */
+/*==================================================*/
 package org.usfirst.frc.team4.robot.commands.PID;
 
 import org.usfirst.frc.team4.robot.Robot;
@@ -14,8 +16,8 @@ public class DriveTrajectory extends Command {
   private TrajectoryFollower m_controller;
   private double m_leftVelocity, m_rightVelocity, m_startTime, m_time, m_lastTime;
 
-  public DriveTrajectory(Trajectory traj, int lookahead, Boolean goingForwards, double kP, double kD) {
-    m_controller = new TrajectoryFollower(traj, lookahead, goingForwards, kP, kD);
+  public DriveTrajectory(Trajectory traj, int lookahead, Boolean goingForwards, double kP, double kD, double kV, double kA) {
+    m_controller = new TrajectoryFollower(traj, lookahead, goingForwards, kP, kD, kV, kA);
     requires(Robot.m_chassis);
   }
 
@@ -31,8 +33,10 @@ public class DriveTrajectory extends Command {
   @Override
   protected void execute() {
     m_time = Timer.getFPGATimestamp() - m_startTime;
-    m_controller.calculate(Robot.m_chassis.getXpos(), Robot.m_chassis.getYpos(), Robot.m_chassis.getGyro(), m_time - m_lastTime);
-    Robot.m_chassis.setVelocityFPS(m_controller.getLeftVelocity(), m_controller.getRightVelocity());
+    m_controller.calculate(Robot.m_chassis.getXPosInches(), Robot.m_chassis.getYPosInches(), Robot.m_chassis.getGyro(), m_time - m_lastTime);
+    m_leftVelocity = m_controller.getLeftVelocity();
+    m_rightVelocity = m_controller.getRightVelocity();
+    Robot.m_chassis.setVelocityIPS(m_leftVelocity, m_rightVelocity);
     m_lastTime = m_time;
   }
 
@@ -52,5 +56,6 @@ public class DriveTrajectory extends Command {
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
+    end();
   }
 }

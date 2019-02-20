@@ -6,18 +6,18 @@ import java.io.File;
 import org.usfirst.frc.team4.robot.Robot;
 import org.usfirst.frc.team4.robot.constants.AutoConstants;
 import org.usfirst.frc.team4.robot.constants.ChassisConstants;
+import org.usfirst.frc.team4.robot.utilities.DistanceFollower;
 
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import jaci.pathfinder.Pathfinder;
 import jaci.pathfinder.Trajectory;
-import org.usfirst.frc.team4.robot.utilities.DistanceFollower;
 import jaci.pathfinder.modifiers.TankModifier;
 
 public class DrivaTrajectoryPathFinder extends Command {
   private Trajectory m_leftTrajectory, m_rightTrajectory, m_sourceTrajectory;
   private DistanceFollower m_leftFollower, m_rightFollower;
-  private double m_leftOutput, m_rightOutput, m_turn, m_angularError;
+  private double m_leftOutput, m_rightOutput, m_leftTurn, m_rightTurn, m_angularError, m_lastError;
   private TankModifier m_modifier;
 
   public DrivaTrajectoryPathFinder(Trajectory traj) {
@@ -48,26 +48,27 @@ public class DrivaTrajectoryPathFinder extends Command {
     m_leftFollower = new DistanceFollower(m_leftTrajectory);
     m_rightFollower = new DistanceFollower(m_rightTrajectory);
     m_leftFollower.configurePIDVA(0, 0, 0,
-    AutoConstants.kV, 0/*AutoConstants.maxAcceleration*/);
+    AutoConstants.kMotionV, 0/*AutoConstants.maxAcceleration*/);
     m_rightFollower.configurePIDVA(
     0, 0, 0, 
-    AutoConstants.kV, 0/*AutoConstants.maxAcceleration*/);
+    AutoConstants.kMotionV, 0/*AutoConstants.maxAcceleration*/);
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    m_leftOutput = m_leftFollower.calculate(Robot.m_chassis.getLeftEncoderInches());/* + Chassis
+    m_leftFollower.calculate(Robot.m_chassis.getLeftEncoderInches() + ChassisConstants.kLeftStatic);/* + Chassis
     AutoConstants.kLeftStatic*/;
-    m_rightOutput = -m_rightFollower.calculate(Robot.m_chassis.getRightEncoderInches());/* + Chassis
+    m_rightFollower.calculate(Robot.m_chassis.getRightEncoderInches() + ChassisConstants.kRightStatic);/* + Chassis
     AutoConstants.kRightStatic;*/
 
-    m_angularError = Pathfinder.boundHalfDegrees(Pathfinder.r2d(-m_leftFollower.getHeading()) - Robot.m_chassis.getGyro());
-    m_turn = /*0.8 * (-1.0/80.0) */ AutoConstants.kRotP * m_angularError;
+    m_leftOutput = -m_leftFollower.getLeftPower();
+    m_rightOutput = m_rightFollower.getRightPower();
+
     Robot.m_chassis.addDesiredVelocities(m_leftFollower.getSegment().velocity, m_rightFollower.getSegment().velocity);
-    System.out.println("left Output: " + m_leftOutput);
-    System.out.println("Right Output: " + m_rightOutput);
-    Robot.m_chassis.setPower((m_leftOutput - m_turn), (m_rightOutput + m_turn));
+    // System.out.println("left turn: " + m_leftTurn);
+    // System.out.println("Right turn: " + m_rightTurn);
+    Robot.m_chassis.setPower((m_leftOutput), (m_rightOutput));
     SmartDashboard.putNumber("Velocity", m_leftFollower.getSegment().velocity);
   }
 
@@ -87,5 +88,6 @@ public class DrivaTrajectoryPathFinder extends Command {
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
+    end();
   }
 }

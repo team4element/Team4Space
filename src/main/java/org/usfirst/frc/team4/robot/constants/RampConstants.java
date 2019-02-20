@@ -4,9 +4,7 @@ package org.usfirst.frc.team4.robot.constants;
  */
 public class RampConstants {
 
-	public static final int DOUBLE_SOLENOID_LEFT_A = 1;
-	public static final int DOUBLE_SOLENOID_LEFT_B = 2;
+	public static final int SOLENOID_LEFT = 4;
 
-	public static final int DOUBLE_SOLENOID_RIGHT_A = 3;
-	public static final int DOUBLE_SOLENOID_RIGHT_B = 0;
+	public static final int SOLENOID_RIGHT = 5;
 }

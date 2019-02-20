@@ -1,10 +1,15 @@
 package org.usfirst.frc.team4.robot.utilities;
 
+import org.usfirst.frc.team4.robot.Robot;
+import org.usfirst.frc.team4.robot.constants.AutoConstants;
+
+import jaci.pathfinder.Pathfinder;
 import jaci.pathfinder.Trajectory;
 
 /**
- * The DistanceFollower is an object designed to follow a trajectory based on distance covered input. This class can be used
- * for Tank or Swerve drive implementations.
+ * The DistanceFollower is an object designed to follow a trajectory based on
+ * distance covered input. This class can be used for Tank or Swerve drive
+ * implementations.
  *
  * @author Jaci
  */
@@ -13,6 +18,8 @@ public class DistanceFollower {
     double kp, ki, kd, kv, ka;
 
     double last_error, heading;
+
+    double calculated_value, turn;
 
     public int segment;
     Trajectory trajectory;
@@ -61,20 +68,27 @@ public class DistanceFollower {
      * @param distance_covered  The distance covered in meters
      * @return                  The desired output for your motor controller
      */
-    public double calculate(double distance_covered) {
+    public void calculate(double distance_covered) {
         if (segment < trajectory.length()) {
             Trajectory.Segment seg = trajectory.get(segment);
             double error = seg.position - distance_covered;
-            double calculated_value =
+            heading = seg.heading;
+            calculated_value =
                     kp * error +                                    // Proportional
                     kd * ((error - last_error) / seg.dt) +          // Derivative
                     (kv * seg.velocity + ka * seg.acceleration);    // V and A Terms
             last_error = error;
-            heading = seg.heading;
-            segment++;
 
-            return calculated_value;
-        } else return 0;
+            double angleError = Pathfinder.boundHalfDegrees(heading - Robot.m_chassis.getGyro()); 
+            segment++;
+            // double theta_sign = (heading < 0) ? -1 : 1;       
+            double theta_feedf =  heading * AutoConstants.kMotionV;
+            double thetaGain = AutoConstants.kTurn * angleError;
+            if (theta_feedf == Double.NaN) {
+                theta_feedf = 0;
+            }
+            turn = thetaGain + theta_feedf;
+        } 
     }
 
     /**
@@ -82,6 +96,13 @@ public class DistanceFollower {
      */
     public double getHeading() {
         return heading;
+    }
+
+    public double getLeftPower(){
+        return calculated_value - turn;
+    }
+    public double getRightPower(){
+        return calculated_value + turn;
     }
 
     /**
