@@ -50,6 +50,10 @@ public class Robot extends TimedRobot {
 		m_ramp = new Ramp();
 		m_oi = new OI();
 
+		m_driveTrain.log();
+		Robot.m_driveTrain.log();
+		Robot.m_arm.log();
+
 	}
 
 	@Override
@@ -93,8 +97,7 @@ public class Robot extends TimedRobot {
 	public void teleopInit() {
 		Robot.m_limelight.setCamMode(LimelightConstants.CameraMode.VISION_PROCESSING);
 		Robot.m_limelight.setLEDMode(LimelightConstants.eLEDMode.ON);
-		Robot.m_driveTrain.log();
-		Robot.m_arm.log();
+		
 		if (m_autonomousCommand != null) {
 			m_autonomousCommand.cancel();
 		}
@@ -104,7 +107,7 @@ public class Robot extends TimedRobot {
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
-		m_driveTrain.log();
+		
 	}
 
 	@Override

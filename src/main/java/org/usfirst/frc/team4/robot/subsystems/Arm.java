@@ -8,6 +8,7 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
+import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -19,13 +20,18 @@ public class Arm extends Subsystem {
 	private WPI_TalonSRX leftMotor;
 	private WPI_VictorSPX rightMotor;
 
+	private AnalogPotentiometer pot;
+
 	//Instantiating Motors
 	public Arm() {
 		leftMotor = new WPI_TalonSRX(ArmConstants.MOTOR_LEFT);
 		leftMotor.setNeutralMode(NeutralMode.Brake);
+		
 		rightMotor = new WPI_VictorSPX(ArmConstants.MOTOR_RIGHT);
 		rightMotor.follow(leftMotor);
 		rightMotor.setInverted(true);
+
+		pot = new AnalogPotentiometer(ArmConstants.POTENTIOMETER);
 	}
 
 	public void initDefaultCommand() {
@@ -33,13 +39,14 @@ public class Arm extends Subsystem {
 
 	}
 
-	public double getPot(){
-		return leftMotor.getSelectedSensorPosition(0);
-	}
-
 	public void setPower(double power) {
 		leftMotor.set(ControlMode.PercentOutput, power);
 	}
+
+	public double getPot(){
+	 	return pot.get();
+	}
+
 	public void log(){
 		SmartDashboard.putNumber("ArmPot", getPot());
 	}
