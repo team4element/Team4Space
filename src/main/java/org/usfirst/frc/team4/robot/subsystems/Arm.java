@@ -1,15 +1,16 @@
 package org.usfirst.frc.team4.robot.subsystems;
 
-import org.usfirst.frc.team4.robot.commands.ArmMove;
-import org.usfirst.frc.team4.robot.constants.ArmConstants;
-
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
+import org.usfirst.frc.team4.robot.commands.ArmMove;
+import org.usfirst.frc.team4.robot.constants.ArmConstants;
+
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.interfaces.Potentiometer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
@@ -20,7 +21,7 @@ public class Arm extends Subsystem {
 	private WPI_TalonSRX leftMotor;
 	private WPI_VictorSPX rightMotor;
 
-	private AnalogPotentiometer pot;
+	private Potentiometer pot;
 
 	//Instantiating Motors
 	public Arm() {
