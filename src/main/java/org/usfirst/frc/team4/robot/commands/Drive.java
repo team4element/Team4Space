@@ -20,9 +20,10 @@ public class Drive extends Command {
 	}
 
 	protected void execute() {
-		double rotationPower = ElementMath.handleDeadband(-ElementMath.cubeInput(-Robot.m_oi.leftY(ControllerConstants.driveController)), .05);
+		double rotationPower = ElementMath.handleDeadband(-ElementMath.cubeInput(Robot.m_oi.leftY(ControllerConstants.driveController)), .05);
 		double straightPower = ElementMath.handleDeadband(ElementMath.cubeInput(Robot.m_oi.rightX(ControllerConstants.driveController)) * .5, .05);
 		Robot.m_driveTrain.setPower(straightPower + rotationPower, straightPower - rotationPower);
+		// Robot.m_driveTrain.setPower(Robot.m_oi.leftY(ControllerConstants.driveController), Robot.m_oi.rightY(ControllerConstants.driveController));
 	}
 
 	protected boolean isFinished() {
