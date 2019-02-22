@@ -2,7 +2,6 @@ package org.usfirst.frc.team4.robot.commands;
 
 import org.usfirst.frc.team4.robot.Robot;
 
-import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
@@ -15,7 +14,8 @@ public class DeployRamp extends Command {
     }
 
     protected void initialize() {
-    	Robot.m_ramp.movePistons(Value.kReverse);
+        Robot.m_ramp.pulsePistons();
+        // Robot.m_ramp.movePistons(Value.kReverse);
     }
 
     protected void execute() {
@@ -30,6 +30,7 @@ public class DeployRamp extends Command {
     }
 
     protected void interrupted() {
-        Robot.m_ramp.movePistons(Value.kForward);
+      
+        // Robot.m_ramp.movePistons(Value.kForward);
     }
 }
