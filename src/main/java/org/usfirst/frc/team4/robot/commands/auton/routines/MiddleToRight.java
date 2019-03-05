@@ -12,6 +12,8 @@ public class MiddleToRight extends CommandGroup {
    * Starts in the middle and targets the right.
    */
   public MiddleToRight() {
+     //Puts arms down
+
     //Drives to half way line
     addSequential(new DrivePID(-AutoConstants.CENTER_OF_ROBOT+AutoConstants.HALF_DISTANCE_TO_LINE, AutoConstants.STRAIGHT), 1.5);
     //Turns -13 degrees

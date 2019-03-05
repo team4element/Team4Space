@@ -12,6 +12,8 @@ public class RightToMiddle extends CommandGroup {
    * Starts on the right and targets the middle.
    */
   public RightToMiddle() {  
+    //Puts arms down
+   
     //Drives to line 
     addSequential(new DrivePID(-AutoConstants.CENTER_OF_ROBOT+AutoConstants.DISTANCE_TO_LINE , AutoConstants.STRAIGHT), 1.5);
     //Turns to 10 degree angle

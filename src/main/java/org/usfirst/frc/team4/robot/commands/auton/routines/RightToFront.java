@@ -13,7 +13,9 @@ public class RightToFront extends CommandGroup {
    * Starts on the right, and ends on the front
    */
   public RightToFront() {
-     //Drives to line 
+     //Puts arms down 
+    
+    //Drives to line 
      addSequential(new DrivePID(-AutoConstants.CENTER_OF_ROBOT+AutoConstants.DISTANCE_TO_LINE , AutoConstants.STRAIGHT), 1.5);
      //Turns to 10 degree angle
      addSequential(new AnglePID(AutoConstants.ANGLE_FOR_RIGHT), 1);

@@ -13,6 +13,8 @@ public class LeftToFront extends CommandGroup {
    * Starts in left position and targets the front target
    */
   public LeftToFront() {
+    //Puts arms down
+    
     //Drives to line 
     addSequential(new DrivePID(-AutoConstants.CENTER_OF_ROBOT+AutoConstants.DISTANCE_TO_LINE , AutoConstants.STRAIGHT), 1.5);
     //Turns to -10 degree angle
