@@ -51,6 +51,11 @@ public class DriveTrain extends Subsystem {
 		// Declaring Encoders (encoders directly plugged into TalonSRX)
 		leftMiddleMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
 		rightMiddleMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
+		
+		//Flips Encoders
+		leftMiddleMotor.setSensorPhase(true);
+		rightMiddleMotor.setSensorPhase(true);
+
 
 		// Instantiating Gyro
 		navX = new AHRS(SPI.Port.kMXP);
