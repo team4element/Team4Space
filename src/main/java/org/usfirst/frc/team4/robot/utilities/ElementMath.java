@@ -26,5 +26,8 @@ public class ElementMath {
 		return ticks * ((circumference * gearRatio) / TicksPerRevolution);
 
 	}
+	public static double visionDistance(double h1, double h2, double a1, double a2){
+		return (h1-h2)/Math.tan(a1+a2);
+	}
 
 }

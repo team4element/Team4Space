@@ -7,6 +7,11 @@ public class LimelightConstants {
 	 public static boolean isLedOn = false;
 	 public static boolean isVisionMode = false;
 
+	 public static double floorToCamera = 18.75;
+	 
+	 public static double mountingAngle = 0;
+
+
 	// Camera Modes
 	public enum CameraMode {
 		VISION_PROCESSING(0), DRIVERSTATION_FEEDBACK(1);
@@ -44,6 +49,15 @@ public class LimelightConstants {
 		public int val;
 
 		eSnapShotMode(int i) {
+			val = i;
+		}
+	}
+	public enum eFloorToTarget{
+		FRONT_ROCKET(39.125), SIDE_ROCKET(31.5), LOADING_STATION(31.5), CARGO(31.5);
+		
+		public double val;
+
+		eFloorToTarget(double i){
 			val = i;
 		}
 	}

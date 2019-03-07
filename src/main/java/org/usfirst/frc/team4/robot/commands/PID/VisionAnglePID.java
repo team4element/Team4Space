@@ -1,4 +1,4 @@
-package org.usfirst.frc.team4.robot.commands;
+package org.usfirst.frc.team4.robot.commands.PID;
 
 import org.usfirst.frc.team4.robot.Robot;
 import org.usfirst.frc.team4.robot.constants.AutoConstants;
@@ -15,14 +15,12 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * This command allows for vision to correct angle while manually 
  * driving forward. We have it set to Driver A button when held in OI
  */
-public class TeleOPVision extends Command {
+public class VisionAnglePID extends Command {
 
 	private SynchronusPID pid;
-	private final Limelight limelight;
 
-	public TeleOPVision() {
+	public VisionAnglePID() {
 		requires(Robot.m_driveTrain);
-		limelight = Limelight.getInstance();
 		
 		pid = new SynchronusPID(AutoConstants.angleKP, AutoConstants.angleKI, AutoConstants.angleKD, false);
 		pid.setSetpoint(0);

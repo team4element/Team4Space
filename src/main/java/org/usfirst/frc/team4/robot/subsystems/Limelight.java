@@ -87,7 +87,7 @@ public class Limelight extends Subsystem {
 
 		return m_instance;
 	}
-
+	
 	public void setSnapShotMode(eSnapShotMode SnapShotMode) {
 		limeTable.getEntry("snapshot").setNumber(SnapShotMode.val);
 		

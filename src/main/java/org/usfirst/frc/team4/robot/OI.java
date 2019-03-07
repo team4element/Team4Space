@@ -4,9 +4,10 @@ package org.usfirst.frc.team4.robot;
 
 import org.usfirst.frc.team4.robot.commands.DeployRamp;
 import org.usfirst.frc.team4.robot.commands.PulseHatchRelease;
-import org.usfirst.frc.team4.robot.commands.TeleOPVision;
 import org.usfirst.frc.team4.robot.commands.ToggleCompressor;
 import org.usfirst.frc.team4.robot.commands.ToggleLED;
+import org.usfirst.frc.team4.robot.commands.teleOPVision.FrontRocket;
+import org.usfirst.frc.team4.robot.commands.teleOPVision.SideRocket;
 import org.usfirst.frc.team4.robot.constants.ControllerConstants;
 
 import edu.wpi.first.wpilibj.Joystick;
@@ -39,8 +40,9 @@ public class OI {
 	public OI() {
 
 		//Driver
-		ControllerConstants.driveA.whileHeld(new TeleOPVision());
-		ControllerConstants.driveB.toggleWhenPressed(new ToggleLED());
+		ControllerConstants.driveA.whileHeld(new FrontRocket());
+		ControllerConstants.driveB.whileHeld(new SideRocket());
+		ControllerConstants.driveRightBumper.toggleWhenPressed(new ToggleLED());
 		ControllerConstants.driveStart.toggleWhenPressed(new DeployRamp());
 
 		//Operator
