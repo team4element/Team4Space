@@ -2,6 +2,9 @@
 package org.usfirst.frc.team4.robot;
 
 
+import org.usfirst.frc.team4.robot.commands.ArmFloorPosition;
+import org.usfirst.frc.team4.robot.commands.ArmHatchPosition;
+import org.usfirst.frc.team4.robot.commands.ArmShootPosition;
 import org.usfirst.frc.team4.robot.commands.DeployRamp;
 import org.usfirst.frc.team4.robot.commands.PulseHatchRelease;
 import org.usfirst.frc.team4.robot.commands.TeleOPVision;
@@ -48,7 +51,11 @@ public class OI {
 
 		//Operator
 		ControllerConstants.operatorA.whenPressed(new PulseHatchRelease());
+		ControllerConstants.operatorY.whileHeld(new ArmHatchPosition());
+		ControllerConstants.operatorB.whileHeld(new ArmShootPosition());
+		ControllerConstants.operatorX.whileHeld(new ArmFloorPosition());
 		ControllerConstants.operatorStart.toggleWhenPressed(new ToggleCompressor());
+
 		
 
 	}

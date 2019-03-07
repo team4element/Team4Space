@@ -36,7 +36,7 @@ public class Robot extends TimedRobot {
 		// Initializing USB Camera (in the RoboRio) with preferred settings
 		new Thread(() -> {
 			UsbCamera cam1 = CameraServer.getInstance().startAutomaticCapture(0);
-			/* cam1.setExposureManual(90); */ cam1.setFPS(40);
+			cam1.setFPS(20);
 			cam1.setResolution(160, 120);
 		}).start();
 
@@ -100,7 +100,7 @@ public class Robot extends TimedRobot {
 	@Override
 	public void teleopInit() {
 		Robot.m_limelight.setCamMode(LimelightConstants.CameraMode.VISION_PROCESSING);
-		Robot.m_limelight.setLEDMode(LimelightConstants.eLEDMode.ON);
+		Robot.m_limelight.setCamMode(LimelightConstants.CameraMode.DRIVERSTATION_FEEDBACK);
 		Robot.m_driveTrain.reset();
 		
 		if (m_autonomousCommand != null) {

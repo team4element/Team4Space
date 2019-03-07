@@ -19,7 +19,12 @@ public class ArmMove extends Command {
 	}
 
 	protected void execute() {
+		if(Robot.m_oi.leftY(ControllerConstants.operatorController) <= .2 
+			&& Robot.m_oi.leftY(ControllerConstants.operatorController) >= -.2){
+			Robot.m_arm.setPower(0);
+		}else{
 		Robot.m_arm.setPower(Robot.m_oi.leftY(ControllerConstants.operatorController) * .75);
+		}
 	}
 
 	protected boolean isFinished() {

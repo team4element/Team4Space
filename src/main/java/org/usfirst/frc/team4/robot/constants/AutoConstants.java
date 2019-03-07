@@ -8,7 +8,7 @@ public class AutoConstants {
 	
 
 
-	//Drive Distance
+	//Drive Distanc
 	public static final double drivekP = .03;
 	public static final double drivekI = 0;
 	public static final double drivekD = .38;
@@ -19,9 +19,9 @@ public class AutoConstants {
 	public static final double angleKD = .39;
 
 	//Arm Angle
-	public static final double armkP = 0;
+	public static final double armkP = .55;
 	public static final double armkI = 0;
-	public static final double armkD = 0;
+	public static final double armkD = .01;
 
 	//Synchronous PID distances in inches
 	public static final double DISTANCE_TO_LINE = 220.25;

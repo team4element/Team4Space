@@ -30,7 +30,7 @@ public class Arm extends Subsystem {
 		rightMotor = new WPI_VictorSPX(ArmConstants.MOTOR_RIGHT);
 		rightMotor.follow(leftMotor);
 		rightMotor.setInverted(true);
-
+		rightMotor.setNeutralMode(NeutralMode.Brake);
 		pot = new AnalogPotentiometer(ArmConstants.POTENTIOMETER);
 	}
 
@@ -44,7 +44,7 @@ public class Arm extends Subsystem {
 	}
 
 	public double getPot(){
-	 	return pot.get();
+	 	return pot.get()*10;
 	}
 
 	public void log(){
