@@ -16,7 +16,7 @@ public class DriveTrainConstants {
 	
 	//Encoder Constants
 	public static double kWheelDiameter = 6.0;
-	public static double gearRatio = (38/60);
+	public static double gearRatio = (.633);
 	public static double circumference = (kWheelDiameter * Math.PI);
 	public static double ticksPerRevolution = 4096.0; 
 	

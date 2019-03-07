@@ -5,6 +5,7 @@ package org.usfirst.frc.team4.robot;
 import org.usfirst.frc.team4.robot.commands.DeployRamp;
 import org.usfirst.frc.team4.robot.commands.PulseHatchRelease;
 import org.usfirst.frc.team4.robot.commands.TeleOPVision;
+import org.usfirst.frc.team4.robot.commands.ToggleCamera;
 import org.usfirst.frc.team4.robot.commands.ToggleCompressor;
 import org.usfirst.frc.team4.robot.commands.ToggleLED;
 import org.usfirst.frc.team4.robot.constants.ControllerConstants;
@@ -41,7 +42,9 @@ public class OI {
 		//Driver
 		ControllerConstants.driveA.whileHeld(new TeleOPVision());
 		ControllerConstants.driveB.toggleWhenPressed(new ToggleLED());
+		ControllerConstants.driveX.toggleWhenPressed(new ToggleCamera());
 		ControllerConstants.driveStart.toggleWhenPressed(new DeployRamp());
+		
 
 		//Operator
 		ControllerConstants.operatorA.whenPressed(new PulseHatchRelease());
