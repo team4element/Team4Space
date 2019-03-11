@@ -30,14 +30,8 @@ public class VisionTurn extends Command {
 
 	protected void initialize() {
 		Robot.m_driveTrain.reset();
-		if(LimelightConstants.isLedOn == false){
-			Robot.m_limelight.setLEDMode(LimelightConstants.eLEDMode.ON);
-			LimelightConstants.isLedOn = true;
-		}
-		else if(LimelightConstants.isVisionMode == false){
-				Robot.m_limelight.setCamMode(LimelightConstants.CameraMode.VISION_PROCESSING);
-				LimelightConstants.isVisionMode = true;
-		}
+		Robot.m_limelight.setLEDMode(LimelightConstants.eLEDMode.ON);
+		Robot.m_limelight.setCamMode(LimelightConstants.CameraMode.VISION_PROCESSING);
 	}
 
 	
@@ -52,10 +46,7 @@ public class VisionTurn extends Command {
 	}
 
 	protected void end() {
-		if(LimelightConstants.isLedOn == true){
 			Robot.m_limelight.setLEDMode(LimelightConstants.eLEDMode.OFF);
-			LimelightConstants.isLedOn = false;
-		}
 	}
 	protected void interrupted() {
 		end();

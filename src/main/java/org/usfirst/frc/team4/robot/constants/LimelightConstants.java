@@ -4,9 +4,6 @@ package org.usfirst.frc.team4.robot.constants;
  */
 public class LimelightConstants {
 
-	 public static boolean isLedOn = false;
-	 public static boolean isVisionMode = false;
-
 	// Camera Modes
 	public enum CameraMode {
 		VISION_PROCESSING(0), DRIVERSTATION_FEEDBACK(1);

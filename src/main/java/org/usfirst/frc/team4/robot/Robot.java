@@ -10,7 +10,9 @@ import org.usfirst.frc.team4.robot.subsystems.Limelight;
 import org.usfirst.frc.team4.robot.subsystems.Ramp;
 import org.usfirst.frc.team4.robot.utilities.AutoChooser;
 
+import edu.wpi.cscore.VideoMode.PixelFormat;
 import edu.wpi.cscore.UsbCamera;
+import edu.wpi.cscore.VideoMode;
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -38,6 +40,9 @@ public class Robot extends TimedRobot {
 			UsbCamera cam1 = CameraServer.getInstance().startAutomaticCapture(0);
 			cam1.setFPS(20);
 			cam1.setResolution(160, 120);
+			
+			
+			
 		}).start();
 
 		m_AutoChooser = new AutoChooser(); 
@@ -100,7 +105,8 @@ public class Robot extends TimedRobot {
 	@Override
 	public void teleopInit() {
 		Robot.m_limelight.setCamMode(LimelightConstants.CameraMode.VISION_PROCESSING);
-		Robot.m_limelight.setCamMode(LimelightConstants.CameraMode.DRIVERSTATION_FEEDBACK);
+		Robot.m_limelight.setLEDMode(LimelightConstants.eLEDMode.ON);
+		// Robot.m_limelight.setCamMode(LimelightConstants.CameraMode.DRIVERSTATION_FEEDBACK);
 		Robot.m_driveTrain.reset();
 		
 		if (m_autonomousCommand != null) {

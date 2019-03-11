@@ -33,19 +33,13 @@ public class TeleOPVision extends Command {
 
 	protected void initialize() {
 		Robot.m_driveTrain.reset();
-		if(LimelightConstants.isLedOn == false){
-			Robot.m_limelight.setLEDMode(LimelightConstants.eLEDMode.ON);
-			LimelightConstants.isLedOn = true;
-		}
-		else if(LimelightConstants.isVisionMode == false){
-				Robot.m_limelight.setCamMode(LimelightConstants.CameraMode.VISION_PROCESSING);
-				LimelightConstants.isVisionMode = true;
-		}
+		Robot.m_limelight.setLEDMode(LimelightConstants.eLEDMode.ON);
+		Robot.m_limelight.setCamMode(LimelightConstants.CameraMode.VISION_PROCESSING);
 	}
-
+	
 	protected void execute() {
 		double angle = pid.calculate(Limelight.getInstance().getTX());
-		Robot.m_driveTrain.arcadeDrive(ElementMath.handleDeadband(-ElementMath.cubeInput(-Robot.m_oi.leftY(ControllerConstants.driveController)), .05), -angle);
+		Robot.m_driveTrain.arcadeDrive(ElementMath.squareInput(-Robot.m_oi.leftY(ControllerConstants.driveController)), -angle);
 		System.out.println(angle);
 	}
 
@@ -55,10 +49,7 @@ public class TeleOPVision extends Command {
 
 	protected void end() {
 		Robot.m_driveTrain.setPower(0, 0);
-		if(LimelightConstants.isLedOn == true){
-			Robot.m_limelight.setLEDMode(LimelightConstants.eLEDMode.OFF);
-			LimelightConstants.isLedOn = false;
-		}
+		Robot.m_limelight.setLEDMode(LimelightConstants.eLEDMode.OFF);
 	}
 
 	protected void interrupted() {

@@ -121,7 +121,7 @@ public class DriveTrain extends Subsystem {
 	}
 
 	public double getGyro() {
-		return navX.getYaw();
+		return navX.getAngle();
 	}
 
 	protected double limit(double value) {

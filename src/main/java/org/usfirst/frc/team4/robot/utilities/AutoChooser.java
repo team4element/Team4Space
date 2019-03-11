@@ -1,12 +1,12 @@
 package org.usfirst.frc.team4.robot.utilities;
 
-import org.usfirst.frc.team4.robot.commands.auton.routines.DoNothing;
 import org.usfirst.frc.team4.robot.commands.auton.routines.LeftToFront;
 import org.usfirst.frc.team4.robot.commands.auton.routines.LeftToMiddle;
 import org.usfirst.frc.team4.robot.commands.auton.routines.MiddleToLeft;
 import org.usfirst.frc.team4.robot.commands.auton.routines.MiddleToRight;
 import org.usfirst.frc.team4.robot.commands.auton.routines.RightToFront;
 import org.usfirst.frc.team4.robot.commands.auton.routines.RightToMiddle;
+import org.usfirst.frc.team4.robot.commands.auton.tune.TuneTurn;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -48,7 +48,8 @@ public class AutoChooser {
 
     public CommandGroup getSelectedAuto() {
         if(getTarget() == target.NONE){
-        return new DoNothing();}    
+        return new TuneTurn();
+      }    
         else if(getStartingPosition() == startingPosition.LEFT && getTarget() == target.FRONT){
           return new LeftToFront();
         }

@@ -15,7 +15,6 @@ public class DeployRamp extends Command {
 
     protected void initialize() {
         Robot.m_ramp.pulsePistons();
-        // Robot.m_ramp.movePistons(Value.kReverse);
     }
 
     protected void execute() {
@@ -31,6 +30,5 @@ public class DeployRamp extends Command {
 
     protected void interrupted() {
       
-        // Robot.m_ramp.movePistons(Value.kForward);
     }
 }
