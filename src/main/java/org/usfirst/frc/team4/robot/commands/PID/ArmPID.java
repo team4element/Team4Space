@@ -2,6 +2,7 @@ package org.usfirst.frc.team4.robot.commands.PID;
 
 import org.usfirst.frc.team4.robot.Robot;
 import org.usfirst.frc.team4.robot.constants.AutoConstants;
+import org.usfirst.frc.team4.robot.constants.ControllerConstants;
 import org.usfirst.frc.team4.robot.utilities.SynchronusPID;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -31,8 +32,8 @@ public class ArmPID extends Command {
   protected void execute() {
     double distance = Robot.m_arm.getPot();
     double output = armPID.calculate(distance);
-    Robot.m_arm.setPower(-output);
-  }
+    Robot.m_arm.setPower(-output * .75);
+}
 
   @Override
   protected boolean isFinished() {

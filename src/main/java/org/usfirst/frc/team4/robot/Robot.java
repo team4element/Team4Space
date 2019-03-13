@@ -1,5 +1,6 @@
 package org.usfirst.frc.team4.robot;
 
+import org.usfirst.frc.team4.robot.commands.auton.tune.TuneTurn;
 import org.usfirst.frc.team4.robot.constants.ControllerConstants;
 import org.usfirst.frc.team4.robot.constants.LimelightConstants;
 import org.usfirst.frc.team4.robot.subsystems.Arm;
@@ -10,9 +11,7 @@ import org.usfirst.frc.team4.robot.subsystems.Limelight;
 import org.usfirst.frc.team4.robot.subsystems.Ramp;
 import org.usfirst.frc.team4.robot.utilities.AutoChooser;
 
-import edu.wpi.cscore.VideoMode.PixelFormat;
 import edu.wpi.cscore.UsbCamera;
-import edu.wpi.cscore.VideoMode;
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -38,8 +37,13 @@ public class Robot extends TimedRobot {
 		// Initializing USB Camera (in the RoboRio) with preferred settings
 		new Thread(() -> {
 			UsbCamera cam1 = CameraServer.getInstance().startAutomaticCapture(0);
+			
 			cam1.setFPS(20);
 			cam1.setResolution(160, 120);
+
+			UsbCamera cam2 = CameraServer.getInstance().startAutomaticCapture(1);
+			cam2.setFPS(20);
+			cam2.setResolution(160, 120);
 			
 			
 			
@@ -80,7 +84,8 @@ public class Robot extends TimedRobot {
 
 		Robot.m_driveTrain.reset();
 
-		m_autonomousCommand = new AutoChooser().getSelectedAuto();
+		// m_autonomousCommand = new AutoChooser().getSelectedAuto();
+		m_autonomousCommand = new TuneTurn();
 	}
 
 	@Override
@@ -104,9 +109,9 @@ public class Robot extends TimedRobot {
 
 	@Override
 	public void teleopInit() {
-		Robot.m_limelight.setCamMode(LimelightConstants.CameraMode.VISION_PROCESSING);
-		Robot.m_limelight.setLEDMode(LimelightConstants.eLEDMode.ON);
-		// Robot.m_limelight.setCamMode(LimelightConstants.CameraMode.DRIVERSTATION_FEEDBACK);
+		// Robot.m_limelight.setCamMode(LimelightConstants.CameraMode.VISION_PROCESSING);
+		// Robot.m_limelight.setLEDMode(LimelightConstants.eLEDMode.ON);
+		Robot.m_limelight.setCamMode(LimelightConstants.CameraMode.DRIVERSTATION_FEEDBACK);
 		Robot.m_driveTrain.reset();
 		
 		if (m_autonomousCommand != null) {

@@ -21,7 +21,7 @@ public class Drive extends Command {
 
 	protected void execute() {
 		double rotationPower = ElementMath.squareInput(-Robot.m_oi.leftY(ControllerConstants.driveController));
-		double straightPower = ElementMath.squareInput(Robot.m_oi.rightX(ControllerConstants.driveController) );
+		double straightPower = ElementMath.squareInput(Robot.m_oi.rightX(ControllerConstants.driveController) * .75);
 		Robot.m_driveTrain.setPower(straightPower + rotationPower, straightPower - rotationPower);
 		// Robot.m_driveTrain.setPower(Robot.m_oi.leftY(ControllerConstants.driveController), Robot.m_oi.rightY(ControllerConstants.driveController));
 	}

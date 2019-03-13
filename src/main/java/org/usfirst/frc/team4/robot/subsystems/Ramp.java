@@ -24,10 +24,10 @@ public class Ramp extends Subsystem {
 	
 	public void pulsePistons(){
 		leftPiston.startPulse();
-		leftPiston.setPulseDuration(3);
+		leftPiston.setPulseDuration(1);
 
 		rightPiston.startPulse();
-		rightPiston.setPulseDuration(3);
+		rightPiston.setPulseDuration(1);
 	}
 
 }

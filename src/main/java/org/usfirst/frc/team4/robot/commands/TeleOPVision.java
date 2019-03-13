@@ -49,7 +49,6 @@ public class TeleOPVision extends Command {
 
 	protected void end() {
 		Robot.m_driveTrain.setPower(0, 0);
-		Robot.m_limelight.setLEDMode(LimelightConstants.eLEDMode.OFF);
 	}
 
 	protected void interrupted() {

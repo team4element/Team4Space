@@ -14,9 +14,9 @@ public class AutoConstants {
 	public static final double drivekD = .38;
 
 	//Drive Angle
-	public static final double angleKP = .01;
+	public static final double angleKP = .02;
 	public static final double angleKI = 0;
-	public static final double angleKD = 0;
+	public static final double angleKD = .15;
 
 	//Arm Angle
 	public static final double armkP = .55;

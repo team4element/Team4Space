@@ -2,15 +2,13 @@
 package org.usfirst.frc.team4.robot;
 
 
-import org.usfirst.frc.team4.robot.commands.ArmFloorPosition;
-import org.usfirst.frc.team4.robot.commands.ArmHatchPosition;
-import org.usfirst.frc.team4.robot.commands.ArmShootPosition;
 import org.usfirst.frc.team4.robot.commands.DeployRamp;
 import org.usfirst.frc.team4.robot.commands.PulseHatchRelease;
 import org.usfirst.frc.team4.robot.commands.TeleOPVision;
 import org.usfirst.frc.team4.robot.commands.ToggleCamera;
 import org.usfirst.frc.team4.robot.commands.ToggleCompressor;
 import org.usfirst.frc.team4.robot.commands.ToggleLED;
+import org.usfirst.frc.team4.robot.commands.PID.ArmPID;
 import org.usfirst.frc.team4.robot.constants.ControllerConstants;
 
 import edu.wpi.first.wpilibj.Joystick;
@@ -43,18 +41,18 @@ public class OI {
 	public OI() {
 
 		//Driver
-		
+
 		ControllerConstants.driveA.whileHeld(new TeleOPVision());
 		ControllerConstants.driveB.toggleWhenPressed(new ToggleLED());
 		ControllerConstants.driveX.toggleWhenPressed(new ToggleCamera());
-		ControllerConstants.driveStart.toggleWhenPressed(new DeployRamp());
+		ControllerConstants.driveStart.whenPressed(new DeployRamp());
 		
 
 		//Operator
-		ControllerConstants.operatorA.whenPressed(new PulseHatchRelease());
-		ControllerConstants.operatorY.whileHeld(new ArmHatchPosition());
-		ControllerConstants.operatorB.whileHeld(new ArmShootPosition());
-		ControllerConstants.operatorX.whileHeld(new ArmFloorPosition());
+		ControllerConstants.operatorA.toggleWhenPressed(new PulseHatchRelease());
+		ControllerConstants.operatorB.whileHeld(new ArmPID((4.5))); // Hatch Position
+		ControllerConstants.operatorY.whileHeld(new ArmPID(6.24)); // Shoot Position
+		ControllerConstants.operatorX.whileHeld(new ArmPID(2.9)); // Back Position
 		ControllerConstants.operatorStart.toggleWhenPressed(new ToggleCompressor());
 
 		

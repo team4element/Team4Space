@@ -29,6 +29,7 @@ public class ToggleCamera extends Command {
     }
 
     protected void interrupted() {
-    	Robot.m_limelight.setCamMode(LimelightConstants.CameraMode.DRIVERSTATION_FEEDBACK);
+        Robot.m_limelight.setCamMode(LimelightConstants.CameraMode.DRIVERSTATION_FEEDBACK);
+        
     }
 }
