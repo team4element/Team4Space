@@ -1,5 +1,6 @@
 package org.usfirst.frc.team4.robot;
 
+import org.usfirst.frc.team4.robot.commands.auton.routines.DoNothing;
 import org.usfirst.frc.team4.robot.commands.auton.tune.TuneTurn;
 import org.usfirst.frc.team4.robot.constants.ControllerConstants;
 import org.usfirst.frc.team4.robot.constants.LimelightConstants;
@@ -85,7 +86,7 @@ public class Robot extends TimedRobot {
 		Robot.m_driveTrain.reset();
 
 		// m_autonomousCommand = new AutoChooser().getSelectedAuto();
-		m_autonomousCommand = new TuneTurn();
+		m_autonomousCommand = new DoNothing();
 	}
 
 	@Override
