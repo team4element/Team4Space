@@ -5,7 +5,7 @@ import org.usfirst.frc.team4.robot.constants.ControllerConstants;
 import org.usfirst.frc.team4.robot.constants.LimelightConstants;
 import org.usfirst.frc.team4.robot.subsystems.Arm;
 import org.usfirst.frc.team4.robot.subsystems.DriveTrain;
-import org.usfirst.frc.team4.robot.subsystems.HatchRelease;
+import org.usfirst.frc.team4.robot.subsystems.HatchHook;
 import org.usfirst.frc.team4.robot.subsystems.Intake;
 import org.usfirst.frc.team4.robot.subsystems.Limelight;
 import org.usfirst.frc.team4.robot.subsystems.Ramp;
@@ -21,7 +21,7 @@ public class Robot extends TimedRobot {
 	public static OI m_oi;
 	public static DriveTrain m_driveTrain;
 	public static Arm m_arm;
-	public static HatchRelease m_hatchRelease;
+	public static HatchHook m_hatchHook;
 	public static Intake m_intake;
 	public static Limelight m_limelight;
 	public static Ramp m_ramp;
@@ -52,7 +52,7 @@ public class Robot extends TimedRobot {
 		ControllerConstants.init();
 		m_driveTrain = new DriveTrain();
 		m_arm = new Arm();
-		m_hatchRelease = new HatchRelease();
+		m_hatchHook = new HatchHook();
 		m_intake = new Intake();
 		m_limelight = new Limelight();
 		m_ramp = new Ramp();
@@ -66,7 +66,7 @@ public class Robot extends TimedRobot {
 
 	@Override
 	public void disabledInit() {
-		Robot.m_limelight.setLEDMode(LimelightConstants.eLEDMode.OFF);
+		// Robot.m_limelight.setLEDMode(LimelightConstants.eLEDMode.OFF);
 	}
 
 	@Override
@@ -91,20 +91,7 @@ public class Robot extends TimedRobot {
 	public void autonomousPeriodic() {
 		Scheduler.getInstance().run();
 
-		m_driveTrain.log();
-		Robot.m_driveTrain.log();
-		Robot.m_arm.log();
-		
-	
-
-		//Cancles Auton 
-		if(ControllerConstants.driveX.get()){
-			m_autonomousCommand.cancel();
-		
-	}else{
-		Robot.m_driveTrain.log();
 	}
-		}
 
 	@Override
 	public void teleopInit() {
@@ -121,9 +108,7 @@ public class Robot extends TimedRobot {
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
-		m_driveTrain.log();
-		Robot.m_driveTrain.log();
-		Robot.m_arm.log();
+	
 		
 	}
 

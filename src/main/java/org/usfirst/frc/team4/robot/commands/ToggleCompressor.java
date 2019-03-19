@@ -10,11 +10,11 @@ import edu.wpi.first.wpilibj.command.Command;
 public class ToggleCompressor extends Command {
 
     public ToggleCompressor() {
-         requires(Robot.m_hatchRelease);
+         requires(Robot.m_hatchHook);
     }
 
     protected void initialize() {
-        Robot.m_hatchRelease.compressorStart();
+        Robot.m_hatchHook.compressorStart();
     }
 
     protected void execute() {
@@ -29,6 +29,6 @@ public class ToggleCompressor extends Command {
     }
 
     protected void interrupted() {
-        Robot.m_hatchRelease.compressorStop();
+        Robot.m_hatchHook.compressorStop();
     }
 }

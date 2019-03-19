@@ -3,7 +3,7 @@ package org.usfirst.frc.team4.robot;
 
 
 import org.usfirst.frc.team4.robot.commands.DeployRamp;
-import org.usfirst.frc.team4.robot.commands.PulseHatchRelease;
+import org.usfirst.frc.team4.robot.commands.PulseHatchHook;
 import org.usfirst.frc.team4.robot.commands.ToggleCompressor;
 import org.usfirst.frc.team4.robot.commands.PID.ArmPID;
 import org.usfirst.frc.team4.robot.constants.ControllerConstants;
@@ -46,11 +46,11 @@ public class OI {
 		
 
 		//Operator
-		ControllerConstants.operatorA.toggleWhenPressed(new PulseHatchRelease());
-		ControllerConstants.operatorB.whileHeld(new ArmPID((5.2))); // Hatch Position
-		ControllerConstants.operatorY.whileHeld(new ArmPID(3.25)); // Shoot Position
-		ControllerConstants.operatorX.whileHeld(new ArmPID(6.83)); // Back Position
-		ControllerConstants.operatorStart.whileHeld(new ArmPID(1.39)); // Back Position
+		ControllerConstants.operatorA.toggleWhenPressed(new PulseHatchHook());
+		ControllerConstants.operatorB.whileHeld(new ArmPID((5.2))); // Placing Hatch Position
+		ControllerConstants.operatorY.whileHeld(new ArmPID(0)); //Shooting Rocket Position
+		ControllerConstants.operatorX.whileHeld(new ArmPID(6.83)); // Shooting Cargo Position
+		ControllerConstants.operatorStart.whileHeld(new ArmPID(1.39)); // Ball Pick Up Position
 		ControllerConstants.operatorSelect.toggleWhenPressed(new ToggleCompressor());
 
 		

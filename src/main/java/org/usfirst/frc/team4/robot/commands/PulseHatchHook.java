@@ -1,30 +1,28 @@
-
-
 package org.usfirst.frc.team4.robot.commands;
 
 import org.usfirst.frc.team4.robot.Robot;
 
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.command.Command;
 
-public class ReduceTurnSpeed extends Command {
-  public ReduceTurnSpeed() {
-      requires(Robot.m_driveTrain);
+public class PulseHatchHook extends Command {
+  public PulseHatchHook() {
+     requires(Robot.m_hatchHook);
   }
 
   @Override
   protected void initialize() {
+    Robot.m_hatchHook.pulseSolenoid(Value.kForward);
     
-    Robot.m_driveTrain.isReduced =! Robot.m_driveTrain.isReduced;
   }
 
   @Override
   protected void execute() {
-   
   }
 
   @Override
   protected boolean isFinished() {
-    return true;
+    return false;
   }
 
   @Override
@@ -33,5 +31,6 @@ public class ReduceTurnSpeed extends Command {
 
   @Override
   protected void interrupted() {
-   }
+    Robot.m_hatchHook.pulseSolenoid(Value.kReverse);
+  }
 }
