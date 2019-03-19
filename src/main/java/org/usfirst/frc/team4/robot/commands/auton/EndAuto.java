@@ -1,4 +1,4 @@
-package org.usfirst.frc.team4.robot.commands;
+package org.usfirst.frc.team4.robot.commands.auton;
 
 import org.usfirst.frc.team4.robot.constants.ControllerConstants;
 

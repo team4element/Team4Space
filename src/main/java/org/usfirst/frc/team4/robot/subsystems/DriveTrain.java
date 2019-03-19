@@ -8,11 +8,8 @@ import com.kauailabs.navx.frc.AHRS;
 
 import org.usfirst.frc.team4.robot.commands.Drive;
 import org.usfirst.frc.team4.robot.constants.DriveTrainConstants;
-import org.usfirst.frc.team4.robot.utilities.ElementMath;
 
-import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * Subsystem for chassis
@@ -58,19 +55,10 @@ public class DriveTrain extends Subsystem {
 		leftMiddleMotor.setSensorPhase(true);
 		rightMiddleMotor.setSensorPhase(true);
 
-
-		// Instantiating Gyro
-		navX = new AHRS(SPI.Port.kMXP);
-
 	}
 
 	public void initDefaultCommand() {
 		setDefaultCommand(new Drive());
-	}
-
-	public void Brake() {
-		leftMiddleMotor.set(ControlMode.PercentOutput, 0);
-		rightMiddleMotor.set(ControlMode.PercentOutput, 0);
 	}
 
 	// setPower is used for teleOP
@@ -86,99 +74,4 @@ public class DriveTrain extends Subsystem {
 
 	}
 
-	public double getRightEncoder() {
-
-		return (ElementMath.ticksToInches(-rightMiddleMotor.getSelectedSensorPosition(0),
-				DriveTrainConstants.circumference, DriveTrainConstants.gearRatio, DriveTrainConstants.ticksPerRevolution))/12;
-
-	}
-
-	public double getLeftEncoder() {
-		return (ElementMath.ticksToInches(leftMiddleMotor.getSelectedSensorPosition(0), DriveTrainConstants.circumference,
-				DriveTrainConstants.gearRatio, DriveTrainConstants.ticksPerRevolution))/12;
-	}
-
-	public double getDistance() {
-		return ((getLeftEncoder() + getRightEncoder()) / 2);
-
-	}
-
-	public double getRawLeftEncoder() {
-		return -leftMiddleMotor.getSelectedSensorPosition(0);
-	}
-
-	public double getRawRightEncoder() {
-		return rightMiddleMotor.getSelectedSensorPosition(0);
-	}
-
-	public void reset() {
-		navX.reset();
-		leftMiddleMotor.setSelectedSensorPosition(0, 0, 0);
-		rightMiddleMotor.setSelectedSensorPosition(0, 0, 0);
-	}
-
-	public void motorsForward(){
-		rightMiddleMotor.set(.5);
-		leftMiddleMotor.set(.5);
-	}
-
-	public double getGyro() {
-		return navX.getAngle();
-	}
-
-	protected double limit(double value) {
-		if (value > 1.0) {
-			return 1.0;
-		}
-		if (value < -1.0) {
-			return -1.0;
-		}
-		return value;
-	}
-
-	public void arcadeDrive(double xSpeed, double zRotation) {
-
-		xSpeed = limit(xSpeed);
-
-		zRotation = limit(zRotation);
-
-		double leftMotorOutput;
-		double rightMotorOutput;
-
-		double maxInput = Math.copySign(Math.max(Math.abs(xSpeed), Math.abs(zRotation)), xSpeed);
-
-		if (xSpeed >= 0.0) {
-			// First quadrant, else second quadrant
-			if (zRotation >= 0.0) {
-				leftMotorOutput = maxInput;
-				rightMotorOutput = xSpeed - zRotation;
-			} else {
-				leftMotorOutput = xSpeed + zRotation;
-				rightMotorOutput = maxInput;
-			}
-		} else {
-			// Third quadrant, else fourth quadrant
-			if (zRotation >= 0.0) {
-				leftMotorOutput = xSpeed + zRotation;
-				rightMotorOutput = maxInput;
-			} else {
-				leftMotorOutput = maxInput;
-				rightMotorOutput = xSpeed - zRotation;
-			}
-		}
-
-		setPower(limit(leftMotorOutput), -limit(rightMotorOutput));
-
-	}
-
-	public void log() {
-		// SmartDashboard.putNumber("Left Encoder", getLeftEncoder());
-		// SmartDashboard.putNumber("Right Encoder", getRightEncoder());
-		// SmartDashboard.putNumber("Raw Left Encoder", getRawLeftEncoder());
-		// SmartDashboard.putNumber("Raw Right Encoder", getRawRightEncoder());
-		// SmartDashboard.putNumber("Encoders", getDistance());
-		// SmartDashboard.putNumber("Angle", getGyro());
-		SmartDashboard.putBoolean("IsTurnReduced?", isReduced);
-
-	}
 }

@@ -39,9 +39,6 @@ public class OI {
 
 		//Driver
 
-		// ControllerConstants.driveA.whileHeld(new ReduceTurnSpeed());
-		//ControllerConstants.driveB.toggleWhenPressed(new ToggleLED());
-		//ControllerConstants.driveX.toggleWhenPressed(new ToggleCamera());
 		ControllerConstants.driveStart.whenPressed(new DeployRamp());
 		
 

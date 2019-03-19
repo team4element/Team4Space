@@ -1,15 +1,12 @@
 package org.usfirst.frc.team4.robot;
 
-import org.usfirst.frc.team4.robot.commands.auton.routines.DoNothing;
+import org.usfirst.frc.team4.robot.commands.auton.DoNothing;
 import org.usfirst.frc.team4.robot.constants.ControllerConstants;
-import org.usfirst.frc.team4.robot.constants.LimelightConstants;
 import org.usfirst.frc.team4.robot.subsystems.Arm;
 import org.usfirst.frc.team4.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team4.robot.subsystems.HatchHook;
 import org.usfirst.frc.team4.robot.subsystems.Intake;
-import org.usfirst.frc.team4.robot.subsystems.Limelight;
 import org.usfirst.frc.team4.robot.subsystems.Ramp;
-import org.usfirst.frc.team4.robot.utilities.AutoChooser;
 
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.cameraserver.CameraServer;
@@ -23,10 +20,8 @@ public class Robot extends TimedRobot {
 	public static Arm m_arm;
 	public static HatchHook m_hatchHook;
 	public static Intake m_intake;
-	public static Limelight m_limelight;
 	public static Ramp m_ramp;
 
-	AutoChooser m_AutoChooser;
 
 	Command m_autonomousCommand;
 
@@ -48,25 +43,20 @@ public class Robot extends TimedRobot {
 			
 
 
-		m_AutoChooser = new AutoChooser(); 
 		ControllerConstants.init();
 		m_driveTrain = new DriveTrain();
 		m_arm = new Arm();
 		m_hatchHook = new HatchHook();
 		m_intake = new Intake();
-		m_limelight = new Limelight();
 		m_ramp = new Ramp();
 		m_oi = new OI();
 
-		m_driveTrain.log();
-		Robot.m_driveTrain.log();
 		Robot.m_arm.log();
 
 	}
 
 	@Override
 	public void disabledInit() {
-		// Robot.m_limelight.setLEDMode(LimelightConstants.eLEDMode.OFF);
 	}
 
 	@Override
@@ -81,7 +71,6 @@ public class Robot extends TimedRobot {
 			m_autonomousCommand.start();
 		}
 
-		Robot.m_driveTrain.reset();
 
 		// m_autonomousCommand = new AutoChooser().getSelectedAuto();
 		m_autonomousCommand = new DoNothing();
@@ -95,10 +84,6 @@ public class Robot extends TimedRobot {
 
 	@Override
 	public void teleopInit() {
-		// Robot.m_limelight.setCamMode(LimelightConstants.CameraMode.VISION_PROCESSING);
-		// Robot.m_limelight.setLEDMode(LimelightConstants.eLEDMode.ON);
-		Robot.m_limelight.setCamMode(LimelightConstants.CameraMode.DRIVERSTATION_FEEDBACK);
-		Robot.m_driveTrain.reset();
 		
 		if (m_autonomousCommand != null) {
 			m_autonomousCommand.cancel();

@@ -14,12 +14,5 @@ public class DriveTrainConstants {
 	public static final int MOTOR_RIGHT_MIDDLE = 4;
 	public static final int MOTOR_RIGHT_REAR = 5;
 	
-	//Encoder Constants
-	public static double kWheelDiameter = 6.0;
-	public static double gearRatio = (.633);
-	public static double circumference = (kWheelDiameter * Math.PI);
-	public static double ticksPerRevolution = 4096.0; 
-	
-	
 		
 }

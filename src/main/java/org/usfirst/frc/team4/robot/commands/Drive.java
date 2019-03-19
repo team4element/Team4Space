@@ -19,14 +19,15 @@ public class Drive extends Command {
 	}
 
 	protected void initialize() {
-		Robot.m_driveTrain.reset();
-		Robot.m_driveTrain.isReduced = false;
 	}
 
 	protected void execute() {
 			 rotationPower = ElementMath.squareInput(-Robot.m_oi.leftY(ControllerConstants.driveController));
 			 straightPower = ElementMath.squareInput(Robot.m_oi.rightX(ControllerConstants.driveController) * .75);
-			Robot.m_driveTrain.setPower(straightPower + rotationPower, straightPower - rotationPower);
+			 //Arcade Drive
+			 Robot.m_driveTrain.setPower(straightPower + rotationPower, straightPower - rotationPower);
+
+			//Tank Drive	 
 		// Robot.m_driveTrain.setPower(Robot.m_oi.leftY(ControllerConstants.driveController), Robot.m_oi.rightY(ControllerConstants.driveController));
 	}
 

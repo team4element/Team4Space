@@ -1,12 +1,13 @@
-package org.usfirst.frc.team4.robot.commands.auton.routines;
+
+package org.usfirst.frc.team4.robot.commands.auton;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 public class DoNothing extends CommandGroup {
   /**
-   * Does nothing.
-   * Use this when auto is broken.
+   * Does Nothing
    */
   public DoNothing() {
+    addSequential(new EndAuto());
   }
 }

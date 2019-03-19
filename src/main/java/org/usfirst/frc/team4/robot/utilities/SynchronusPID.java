@@ -7,8 +7,6 @@ import edu.wpi.first.wpilibj.SendableBase;
 import edu.wpi.first.wpilibj.smartdashboard.SendableBuilder;
 import edu.wpi.first.hal.util.BoundaryException;
 
-
-
 /**
  * This PID Loop was taken from 254 in C++, then was converted to Java by Team4Element.
  * There is no Feed Forward
@@ -17,6 +15,7 @@ import edu.wpi.first.hal.util.BoundaryException;
  * Does all computation synchronously (i.e. the calculate() function must be
  * called by the user from his own thread)
  */
+
 public class SynchronusPID extends SendableBase implements Sendable {
 	private boolean m_readOnly;
 	
