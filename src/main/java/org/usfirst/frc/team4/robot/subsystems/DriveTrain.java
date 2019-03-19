@@ -31,6 +31,8 @@ public class DriveTrain extends Subsystem {
 	private WPI_TalonSRX rightMiddleMotor;
 	private WPI_VictorSPX rightRearMotor;
 
+	public boolean isReduced = false;
+
 	public DriveTrain() {
 		// Instantiating motors
 		leftMiddleMotor = new WPI_TalonSRX(DriveTrainConstants.MOTOR_LEFT_MIDDLE);
@@ -170,11 +172,13 @@ public class DriveTrain extends Subsystem {
 	}
 
 	public void log() {
-		SmartDashboard.putNumber("Left Encoder", getLeftEncoder());
-		SmartDashboard.putNumber("Right Encoder", getRightEncoder());
-		SmartDashboard.putNumber("Raw Left Encoder", getRawLeftEncoder());
-		SmartDashboard.putNumber("Raw Right Encoder", getRawRightEncoder());
-		SmartDashboard.putNumber("Encoders", getDistance());
-		SmartDashboard.putNumber("Angle", getGyro());
+		// SmartDashboard.putNumber("Left Encoder", getLeftEncoder());
+		// SmartDashboard.putNumber("Right Encoder", getRightEncoder());
+		// SmartDashboard.putNumber("Raw Left Encoder", getRawLeftEncoder());
+		// SmartDashboard.putNumber("Raw Right Encoder", getRawRightEncoder());
+		// SmartDashboard.putNumber("Encoders", getDistance());
+		// SmartDashboard.putNumber("Angle", getGyro());
+		SmartDashboard.putBoolean("IsTurnReduced?", isReduced);
+
 	}
 }

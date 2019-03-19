@@ -20,7 +20,7 @@ public class Intake extends Subsystem {
 		//Instantiating Motors
 		motorTop = new WPI_VictorSPX(IntakeConstants.MOTOR_LEFT);
 		motorBot = new WPI_VictorSPX(IntakeConstants.MOTOR_RIGHT);
-		motorBot.setInverted(true); //False for comp bot
+		motorBot.setInverted(false); //False for comp bot
 	}
 
 	public void initDefaultCommand() {

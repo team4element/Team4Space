@@ -32,7 +32,7 @@ public class ArmPID extends Command {
   protected void execute() {
     double distance = Robot.m_arm.getPot();
     double output = armPID.calculate(distance);
-    Robot.m_arm.setPower(-output * .75);
+    Robot.m_arm.setPower(output * .75);
 }
 
   @Override

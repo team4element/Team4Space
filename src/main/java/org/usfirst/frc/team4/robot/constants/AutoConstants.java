@@ -19,7 +19,7 @@ public class AutoConstants {
 	public static final double angleKD = .15;
 
 	//Arm Angle
-	public static final double armkP = .55;
+	public static final double armkP = .6;
 	public static final double armkI = 0;
 	public static final double armkD = .01;
 

@@ -36,19 +36,18 @@ public class Robot extends TimedRobot {
 
 		
 		// Initializing USB Camera (in the RoboRio) with preferred settings
-		new Thread(() -> {
-			UsbCamera cam1 = CameraServer.getInstance().startAutomaticCapture(0);
-			
-			cam1.setFPS(20);
-			cam1.setResolution(160, 120);
+	
+		UsbCamera cam1 = CameraServer.getInstance().startAutomaticCapture(0);	
+		cam1.setFPS(20);
+		cam1.setResolution(160, 120);
 
-			UsbCamera cam2 = CameraServer.getInstance().startAutomaticCapture(1);
-			cam2.setFPS(20);
-			cam2.setResolution(160, 120);
+			// UsbCamera cam2 = CameraServer.getInstance().startAutomaticCapture(1);
+			// cam2.setFPS(20);
+			// cam2.setResolution(160, 120);
 			
 			
 			
-		}).start();
+
 
 		m_AutoChooser = new AutoChooser(); 
 		ControllerConstants.init();

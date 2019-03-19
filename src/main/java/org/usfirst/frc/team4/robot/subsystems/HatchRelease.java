@@ -43,16 +43,16 @@ public class HatchRelease extends Subsystem {
 
 	public void pulseSolenoids() {
 		solenoidLeftTop.startPulse();
-		solenoidLeftTop.setPulseDuration(.75);
+		solenoidLeftTop.setPulseDuration(3);
 
 		solenoidLeftBot.startPulse();
-		solenoidLeftBot.setPulseDuration(.75);
+		solenoidLeftBot.setPulseDuration(3);
 
 		solenoidRightTop.startPulse();
-		solenoidRightTop.setPulseDuration(.75);
+		solenoidRightTop.setPulseDuration(3);
 
 		solenoidRightBot.startPulse();
-		solenoidRightBot.setPulseDuration(.75);
+		solenoidRightBot.setPulseDuration(3);
 
 	}
 

@@ -4,7 +4,7 @@ package org.usfirst.frc.team4.robot;
 
 import org.usfirst.frc.team4.robot.commands.DeployRamp;
 import org.usfirst.frc.team4.robot.commands.PulseHatchRelease;
-import org.usfirst.frc.team4.robot.commands.TeleOPVision;
+import org.usfirst.frc.team4.robot.commands.ReduceTurnSpeed;
 import org.usfirst.frc.team4.robot.commands.ToggleCamera;
 import org.usfirst.frc.team4.robot.commands.ToggleCompressor;
 import org.usfirst.frc.team4.robot.commands.ToggleLED;
@@ -42,18 +42,19 @@ public class OI {
 
 		//Driver
 
-		ControllerConstants.driveA.whileHeld(new TeleOPVision());
-		ControllerConstants.driveB.toggleWhenPressed(new ToggleLED());
-		ControllerConstants.driveX.toggleWhenPressed(new ToggleCamera());
+		// ControllerConstants.driveA.whileHeld(new ReduceTurnSpeed());
+		//ControllerConstants.driveB.toggleWhenPressed(new ToggleLED());
+		//ControllerConstants.driveX.toggleWhenPressed(new ToggleCamera());
 		ControllerConstants.driveStart.whenPressed(new DeployRamp());
 		
 
 		//Operator
 		ControllerConstants.operatorA.toggleWhenPressed(new PulseHatchRelease());
-		ControllerConstants.operatorB.whileHeld(new ArmPID((4.5))); // Hatch Position
-		ControllerConstants.operatorY.whileHeld(new ArmPID(6.24)); // Shoot Position
-		ControllerConstants.operatorX.whileHeld(new ArmPID(2.9)); // Back Position
-		ControllerConstants.operatorStart.toggleWhenPressed(new ToggleCompressor());
+		ControllerConstants.operatorB.whileHeld(new ArmPID((5.2))); // Hatch Position
+		ControllerConstants.operatorY.whileHeld(new ArmPID(3.25)); // Shoot Position
+		ControllerConstants.operatorX.whileHeld(new ArmPID(6.83)); // Back Position
+		ControllerConstants.operatorStart.whileHeld(new ArmPID(1.39)); // Back Position
+		ControllerConstants.operatorSelect.toggleWhenPressed(new ToggleCompressor());
 
 		
 
