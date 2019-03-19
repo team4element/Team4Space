@@ -1,7 +1,6 @@
 package org.usfirst.frc.team4.robot;
 
 import org.usfirst.frc.team4.robot.commands.auton.routines.DoNothing;
-import org.usfirst.frc.team4.robot.commands.auton.tune.TuneTurn;
 import org.usfirst.frc.team4.robot.constants.ControllerConstants;
 import org.usfirst.frc.team4.robot.constants.LimelightConstants;
 import org.usfirst.frc.team4.robot.subsystems.Arm;

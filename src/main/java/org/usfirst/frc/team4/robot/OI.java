@@ -4,10 +4,7 @@ package org.usfirst.frc.team4.robot;
 
 import org.usfirst.frc.team4.robot.commands.DeployRamp;
 import org.usfirst.frc.team4.robot.commands.PulseHatchRelease;
-import org.usfirst.frc.team4.robot.commands.ReduceTurnSpeed;
-import org.usfirst.frc.team4.robot.commands.ToggleCamera;
 import org.usfirst.frc.team4.robot.commands.ToggleCompressor;
-import org.usfirst.frc.team4.robot.commands.ToggleLED;
 import org.usfirst.frc.team4.robot.commands.PID.ArmPID;
 import org.usfirst.frc.team4.robot.constants.ControllerConstants;
 

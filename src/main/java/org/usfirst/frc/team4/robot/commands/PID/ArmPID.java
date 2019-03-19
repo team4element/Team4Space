@@ -2,7 +2,6 @@ package org.usfirst.frc.team4.robot.commands.PID;
 
 import org.usfirst.frc.team4.robot.Robot;
 import org.usfirst.frc.team4.robot.constants.AutoConstants;
-import org.usfirst.frc.team4.robot.constants.ControllerConstants;
 import org.usfirst.frc.team4.robot.utilities.SynchronusPID;
 
 import edu.wpi.first.wpilibj.command.Command;
