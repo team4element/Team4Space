@@ -1,10 +1,8 @@
 package org.usfirst.frc.team4.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
-import com.kauailabs.navx.frc.AHRS;
 
 import org.usfirst.frc.team4.robot.commands.Drive;
 import org.usfirst.frc.team4.robot.constants.DriveTrainConstants;

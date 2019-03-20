@@ -25,7 +25,7 @@ public class IntakeMove extends Command {
 
 			// Out-take
 		} else if (ControllerConstants.operatorLeftBumper.get()) {
-			Robot.m_intake.setMotorsSpeed(.3);
+			Robot.m_intake.setMotorsSpeed(.4);
 		} else {
 			Robot.m_intake.motorsStop();
 		}
