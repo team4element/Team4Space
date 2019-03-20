@@ -16,7 +16,6 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class DriveTrain extends Subsystem {
 	// Declaring navX
-	private AHRS navX;
 
 	// Declaring Left Motors
 	private WPI_VictorSPX leftFrontMotor;
@@ -47,13 +46,7 @@ public class DriveTrain extends Subsystem {
 		rightFrontMotor.follow(rightMiddleMotor);
 		rightRearMotor.follow(rightMiddleMotor);
 
-		// Declaring Encoders (encoders directly plugged into TalonSRX)
-		leftMiddleMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
-		rightMiddleMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
 		
-		//Flips Encoders
-		leftMiddleMotor.setSensorPhase(true);
-		rightMiddleMotor.setSensorPhase(true);
 
 	}
 

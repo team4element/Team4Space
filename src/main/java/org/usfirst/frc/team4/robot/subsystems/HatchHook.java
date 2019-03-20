@@ -15,13 +15,15 @@ public class HatchHook extends Subsystem {
 	//Declaring Solenoids and Compressor
 	
 	public static Compressor compressor;
-	public static DoubleSolenoid DoubleSolenoid;
+	public static DoubleSolenoid frontHook;
+	public static DoubleSolenoid backHook;
 
 	public HatchHook() {
 		//Instantiating Solenoids and Compressor
 		
 		compressor = new Compressor(HatchHookConstants.COMPRESSOR);
-		DoubleSolenoid = new DoubleSolenoid(HatchHookConstants.DOUBLE_SOLENOID_FORWARD, HatchHookConstants.DOUBLE_SOLENOID_BACKWARD);
+		frontHook = new DoubleSolenoid(HatchHookConstants.FRONT_HOOK_FORWARD, HatchHookConstants.FRONT_HOOK_BACKWARD);
+		backHook = new DoubleSolenoid(HatchHookConstants.BACK_HOOK_FORWARD, HatchHookConstants.BACK_HOOK_BACKWARD);
 
 
 		compressor.setClosedLoopControl(false);
@@ -32,8 +34,9 @@ public class HatchHook extends Subsystem {
 
 	}
 
-	public void pulseSolenoid(Value direction) {
-		DoubleSolenoid.set(direction);
+	public void pulseHooks(Value direction) {
+		frontHook.set(direction);
+		backHook.set(direction);
 	}
 
 	public void compressorStart() {

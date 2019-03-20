@@ -21,11 +21,11 @@ public class IntakeMove extends Command {
 	protected void execute() {
 		// In-take
 		if (ControllerConstants.operatorRightBumper.get()) {
-			Robot.m_intake.setMotorsSpeed(-.50);
+			Robot.m_intake.setMotorsSpeed(-.5);
 
 			// Out-take
 		} else if (ControllerConstants.operatorLeftBumper.get()) {
-			Robot.m_intake.setMotorsSpeed(.50);
+			Robot.m_intake.setMotorsSpeed(.3);
 		} else {
 			Robot.m_intake.motorsStop();
 		}

@@ -12,7 +12,7 @@ public class PulseHatchHook extends Command {
 
   @Override
   protected void initialize() {
-    Robot.m_hatchHook.pulseSolenoid(Value.kForward);
+    Robot.m_hatchHook.pulseHooks(Value.kForward);
     
   }
 
@@ -31,6 +31,6 @@ public class PulseHatchHook extends Command {
 
   @Override
   protected void interrupted() {
-    Robot.m_hatchHook.pulseSolenoid(Value.kReverse);
+    Robot.m_hatchHook.pulseHooks(Value.kReverse);
   }
 }

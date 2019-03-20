@@ -87,14 +87,14 @@ public class Robot extends TimedRobot {
 		
 		if (m_autonomousCommand != null) {
 			m_autonomousCommand.cancel();
+			
 		}
 	}
 
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
-	
-		
+		Robot.m_arm.log();
 	}
 
 	@Override
