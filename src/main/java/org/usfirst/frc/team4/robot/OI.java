@@ -44,10 +44,10 @@ public class OI {
 
 		//Operator
 		ControllerConstants.operatorA.toggleWhenPressed(new PulseHatchHook());
-		ControllerConstants.operatorB.whileHeld(new ArmPID((5.2))); // Placing Hatch Position
-		ControllerConstants.operatorY.whileHeld(new ArmPID(0)); //Shooting Rocket Position
-		ControllerConstants.operatorX.whileHeld(new ArmPID(6.83)); // Shooting Cargo Position
-		ControllerConstants.operatorStart.whileHeld(new ArmPID(1.39)); // Ball Pick Up Position
+		ControllerConstants.operatorB.whileHeld(new ArmPID((5.13))); // Placing Hatch Position
+		ControllerConstants.operatorY.whileHeld(new ArmPID(6.83)); //Shooting Rocket Position
+		ControllerConstants.operatorX.whileHeld(new ArmPID(6.03)); // Shooting Cargo Position
+		ControllerConstants.operatorStart.whileHeld(new ArmPID(1.32)); // Ball Pick Up Position
 		ControllerConstants.operatorSelect.toggleWhenPressed(new ToggleCompressor());
 
 		
