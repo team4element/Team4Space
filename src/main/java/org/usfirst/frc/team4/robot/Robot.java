@@ -52,6 +52,7 @@ public class Robot extends TimedRobot {
 		m_oi = new OI();
 
 		Robot.m_arm.log();
+		Robot.m_hatchHook.log();
 
 	}
 
@@ -79,7 +80,14 @@ public class Robot extends TimedRobot {
 	@Override
 	public void autonomousPeriodic() {
 		Scheduler.getInstance().run();
+		
+		Robot.m_arm.log();
+		Robot.m_hatchHook.log();
 
+		if(Robot.m_arm.getPot() < 3.6 || Robot.m_arm.getPot() >= 8){
+			Robot.m_hatchHook.hooksForward();
+			Robot.m_hatchHook.isOut = false;
+		}
 	}
 
 	@Override
@@ -94,7 +102,15 @@ public class Robot extends TimedRobot {
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
+		
 		Robot.m_arm.log();
+		Robot.m_hatchHook.log();
+		
+		if(Robot.m_arm.getPot() < 3.6 || Robot.m_arm.getPot() >= 8){
+			Robot.m_hatchHook.hooksForward();
+			Robot.m_hatchHook.isOut = false;
+		}
+
 	}
 
 	@Override

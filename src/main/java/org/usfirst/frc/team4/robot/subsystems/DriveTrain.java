@@ -59,10 +59,10 @@ public class DriveTrain extends Subsystem {
 	}
 
 	// arcade drive is used to handle math for drive and vision PID
-	public void arcadeDrive(double leftPower, double rightPower, double angle) {
-		leftMiddleMotor.set(ControlMode.PercentOutput, leftPower);
-		rightMiddleMotor.set(ControlMode.PercentOutput, rightPower);
-
-	}
+	// public void arcadeDrive(double leftPower, double rightPower, double angle) {
+		// leftMiddleMotor.set(ControlMode.PercentOutput, leftPower);
+		// rightMiddleMotor.set(ControlMode.PercentOutput, rightPower);
+// 
+	// }
 
 }

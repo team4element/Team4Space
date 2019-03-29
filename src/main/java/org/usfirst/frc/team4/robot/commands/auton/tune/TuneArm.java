@@ -12,8 +12,5 @@ public class TuneArm extends CommandGroup {
   public TuneArm() {
     addSequential(new ArmPID(9.45));
 
-    //Hatch is 5.6
-    //Shoot is 7.21
-    //Drive angle is 9.45
   }
 }

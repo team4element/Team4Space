@@ -2,7 +2,6 @@ package org.usfirst.frc.team4.robot.commands;
 
 import org.usfirst.frc.team4.robot.Robot;
 
-import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.command.Command;
 
 public class PulseHatchHook extends Command {
@@ -13,6 +12,7 @@ public class PulseHatchHook extends Command {
   @Override
   protected void initialize() {
     Robot.m_hatchHook.hooksForward();
+    Robot.m_hatchHook.isOut = false;
     
   }
 
@@ -32,5 +32,7 @@ public class PulseHatchHook extends Command {
   @Override
   protected void interrupted() {
     Robot.m_hatchHook.hooksReverse();
+    Robot.m_hatchHook.isOut = true;
+
   }
 }

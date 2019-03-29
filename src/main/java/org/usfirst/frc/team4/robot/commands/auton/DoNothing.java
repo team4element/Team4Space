@@ -8,6 +8,6 @@ public class DoNothing extends CommandGroup {
    * Does Nothing
    */
   public DoNothing() {
-    addSequential(new EndAuto());
+  
   }
 }

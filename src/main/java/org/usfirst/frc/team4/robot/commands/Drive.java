@@ -22,7 +22,7 @@ public class Drive extends Command {
 	}
 
 	protected void execute() {
-			 rotationPower = ElementMath.squareInput(-Robot.m_oi.leftY(ControllerConstants.driveController));
+			 rotationPower = ElementMath.squareInput(-Robot.m_oi.leftY(ControllerConstants.driveController) * .9);
 			 straightPower = ElementMath.squareInput(Robot.m_oi.rightX(ControllerConstants.driveController) * .75);
 			 //Arcade Drive
 			 Robot.m_driveTrain.setPower(straightPower + rotationPower, straightPower - rotationPower);
@@ -36,7 +36,7 @@ public class Drive extends Command {
 	}
 
 	protected void end() {
-		Robot.m_driveTrain.setPower(0, 0);
+		// Robot.m_driveTrain.setPower(0, 0);
 	}
 
 	protected void interrupted() {

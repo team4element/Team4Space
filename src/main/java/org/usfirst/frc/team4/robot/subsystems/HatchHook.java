@@ -3,9 +3,9 @@ package org.usfirst.frc.team4.robot.subsystems;
 import org.usfirst.frc.team4.robot.constants.HatchHookConstants;
 
 import edu.wpi.first.wpilibj.Compressor;
-import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * Subsystem for HatchHook (
@@ -18,8 +18,10 @@ public class HatchHook extends Subsystem {
 	public static Solenoid frontHook;
 	public static Solenoid backHook;
 
+	public boolean isOut = true;
+
 	public HatchHook() {
-		//Instantiating Solenoids and Compressor
+	//Instantiating Solenoids and Compressor
 		
 		compressor = new Compressor(HatchHookConstants.COMPRESSOR);
 		frontHook = new Solenoid(HatchHookConstants.FRONT_HOOK_FORWARD);
@@ -57,5 +59,8 @@ public class HatchHook extends Subsystem {
 
 	public void compressorStop() {
 		compressor.stop();
+	}
+	public void log(){
+		SmartDashboard.putBoolean("IsHookForward?", isOut);
 	}
 }
